@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Portal - Medivax Operational</title>
+  <link rel="stylesheet" href="CSS/index.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0d9488;
+      --primary-dark: #0f766e;
+      --primary-light: #f0fdfa;
+      --sidebar-bg: #0f172a;
+      --sidebar-hover: #1e293b;
+      --bg-main: #f8fafc;
+      --text-main: #334155;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: var(--bg-main); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; }
+    
+    .sidebar { width: 260px; background-color: var(--sidebar-bg); color: #94a3b8; display: flex; flex-direction: column; box-shadow: 4px 0 10px rgba(0,0,0,0.05); z-index: 10; }
+    .sidebar-header { padding: 22px 20px; background: #090d16; color: #38bdf8; font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+    .sidebar-menu { list-style: none; overflow-y: auto; flex: 1; padding: 15px 12px; display: flex; flex-direction: column; gap: 4px; }
+    .menu-item { padding: 12px 16px; cursor: pointer; display: flex; align-items: center; gap: 12px; font-size: 14px; color: #94a3b8; border-radius: 8px; transition: all 0.2s ease; font-weight: 500; }
+    .menu-item:hover { background-color: var(--sidebar-hover); color: #ffffff; }
+    .menu-item.active { background-color: var(--primary); color: #ffffff; font-weight: 600; box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3); }
+    
+    .main-wrapper { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    .top-header { height: 70px; background: #ffffff; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; padding: 0 30px; }
+    .top-header h3 { font-size: 18px; font-weight: 700; color: #1e293b; }
+    
+    .content-area { flex: 1; padding: 30px; overflow-y: auto; }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; animation: fadeIn 0.25s ease-in-out; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .btn { padding: 9px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+    .btn-teal { background: var(--primary); color: white; }
+    .btn-teal:hover { background: var(--primary-dark); }
+    .btn-danger { background: #ef4444; color: white; }
+    .btn-warning { background: #f59e0b; color: white; }
+    .btn-secondary { background: #64748b; color: white; }
+
+    .badge { padding: 6px 12px; border-radius: 30px; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; text-transform: uppercase; }
+    .badge-pending { background-color: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+    .badge-arrived { background-color: #d1fae5; color: #047857; border: 1px solid #a7f3d0; }
+    .badge-missing { background-color: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
+    .badge-cancelled { background-color: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+
+    .actions { display: flex; gap: 6px; align-items: center; }
+    .btn-action { padding: 6px 10px; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600; color: white; }
+    .btn-arrived { background-color: #10b981; }
+    .btn-missing { background-color: #f59e0b; }
+    .btn-cancel-status { background-color: #64748b; }
+    .btn-delete-row { background-color: #fee2e2; color: #ef4444; padding: 6px 8px; }
+    
+    .custom-table-wrapper { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid var(--border-color); }
+    .custom-table { width: 100%; border-collapse: collapse; text-align: left; }
+    .custom-table th, .custom-table td { padding: 15px 20px; border-bottom: 1px solid var(--border-color); font-size: 14px; }
+    .custom-table th { background: #f8fafc; font-weight: 600; color: #475569; font-size: 12px; text-transform: uppercase; }
+    .custom-table tbody tr:hover { background-color: #f8fafc; }
+
+    .filter-box { background: white; padding: 20px 24px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid var(--border-color); display: flex; gap: 12px; align-items: center; }
+    .form-control { width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; outline: none; background: #fff; }
+    .form-box { background: white; padding: 25px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid var(--border-color); }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 13px; color: #334155; }
+
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); justify-content: center; align-items: center; z-index: 1000; }
+    .modal-content { background: white; width: 850px; max-width: 95%; max-height: 90vh; overflow-y: auto; border-radius: 16px; padding: 30px; }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 18px; margin-bottom: 20px; }
+    .modal-close { background: #f1f5f9; border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; color: #64748b; }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <span>🛡️</span> Medivax STAFF
+    </div>
+    <ul class="sidebar-menu">
+      <li class="menu-item active" data-tab="tab-checkin">📋 Check-in & Tiếp đón</li>
+      <li class="menu-item" data-tab="tab-appointments">📅 Lịch hẹn hôm nay</li>
+      <li class="menu-item" data-tab="tab-services">💉 Quản lý Dịch vụ</li>
+      <li class="menu-item" data-tab="tab-doctors">👨‍⚕️ Quản lý Bác sĩ</li>
+      <li class="menu-item" data-tab="tab-news">📰 Quản lý Tin tức</li>
+      <li class="menu-item" data-tab="tab-customers">👥 Quản lý Khách hàng</li>
+      <li class="menu-item" data-tab="tab-support">💬 Hỗ trợ / Tư vấn</li>
+      <li class="menu-item" data-tab="tab-attendance">⏱️ Chấm công nhân viên</li>
+    </ul>
+    <div style="padding: 20px;">
+      <a href="index.html" target="_blank" class="btn btn-teal" style="width: 100%; justify-content: center; text-decoration: none; padding: 11px;">🌐 Xem Trang chủ</a>
+    </div>
+  </aside>
+
+  <div class="main-wrapper">
+    <header class="top-header">
+      <h3 id="current-title">Check-in & Tiếp đón Khách hàng</h3>
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <div style="display: flex; align-items: center; gap: 8px; background: #f8fafc; padding: 6px 14px; border-radius: 30px; border: 1px solid var(--border-color);">
+          <span style="font-size: 14px;">👨‍💻</span>
+          <span id="user-profile-display" style="font-weight: 600; font-size: 13px; color: #1e293b;">TRAN VIET DUC (Quản trị)</span>
+        </div>
+        <button class="btn btn-danger" onclick="logout()" style="padding: 8px 14px;">Đăng xuất</button>
+      </div>
+    </header>
+
+    <main class="content-area">
+      <section id="tab-checkin" class="tab-pane active">
+        <div class="filter-box" style="flex-direction: column; align-items: stretch; gap: 10px;">
+          <h4>🔍 Tra cứu nhanh Số điện thoại / Mã lịch hẹn</h4>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="searchInput" class="form-control" placeholder="Nhập SĐT khách hàng hoặc tên..." onkeyup="filterCheckinTable()">
+            <button class="btn btn-teal" onclick="filterCheckinTable()" style="padding: 0 24px;">Tìm kiếm</button>
+          </div>
+        </div>
+        <div class="custom-table-wrapper">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>Khách hàng</th>
+                <th>SĐT</th>
+                <th>Vắc-xin đăng ký</th>
+                <th>Bác sĩ phụ trách</th>
+                <th>Giờ hẹn</th>
+                <th>Trạng thái</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="appointmentTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="tab-appointments" class="tab-pane">
+        <div class="filter-box" style="justify-content: space-between; margin-bottom: 20px;">
+          <h4 style="margin: 0; font-size: 16px;">📅 Danh sách Lịch hẹn cần xử lý</h4>
+          <span id="today-date-label" style="font-size: 13px; color: var(--primary); font-weight: 700; background: var(--primary-light); padding: 6px 12px; border-radius: 20px;"></span>
+        </div>
+        <div class="custom-table-wrapper">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>Khách hàng</th>
+                <th>SĐT</th>
+                <th>Dịch vụ đăng ký</th>
+                <th>Bác sĩ phụ trách</th>
+                <th>Giờ hẹn</th>
+                <th>Trạng thái</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="appointmentTodayTableBody">
+              <tr><td colspan="7" style="text-align: center; color: #888;">Đang tải dữ liệu...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="tab-services" class="tab-pane">
+        <div class="form-box">
+          <h4 id="service-form-title" style="margin-bottom: 20px; color: var(--primary); font-size: 16px; font-weight: 700;">➕ Thêm Dịch vụ / Gói Vắc-xin Mới</h4>
+          <form id="service-form">
+            <input type="hidden" id="service-id">
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+              <div class="form-group">
+                <label>Tên dịch vụ / Vắc-xin:</label>
+                <input type="text" id="service-name" class="form-control" required placeholder="Ví dụ: Gói vắc-xin toàn diện...">
+              </div>
+              <div class="form-group">
+                <label>Độ tuổi thích hợp:</label>
+                <input type="text" id="service-age" class="form-control" placeholder="Ví dụ: 0-12 tháng...">
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+              <div class="form-group">
+                <label>Giá mới (VNĐ):</label>
+                <input type="number" id="service-price" class="form-control" placeholder="Ví dụ: 1500000">
+              </div>
+              <div class="form-group">
+                <label>Giá gốc (VNĐ):</label>
+                <input type="number" id="service-old-price" class="form-control" placeholder="Ví dụ: 1800000">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Chi tiết mô tả dịch vụ:</label>
+              <textarea id="service-desc" class="form-control" rows="4" placeholder="Nhập mô tả chi tiết..."></textarea>
+            </div>
+            <div class="form-group">
+              <label>Hình ảnh đại diện (Đường dẫn):</label>
+              <input type="text" id="service-image" class="form-control" placeholder="IMAGE/anh.jpg...">
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+              <button type="submit" class="btn btn-teal" id="btn-save-service">Lưu dịch vụ</button>
+              <button type="button" class="btn btn-secondary" id="btn-cancel-edit-service" style="display:none;" onclick="resetServiceForm()">Hủy bỏ</button>
+            </div>
+          </form>
+        </div>
+        <h4 style="margin-bottom: 15px; font-size: 16px; font-weight: 700;">📋 Danh sách dịch vụ hiện hành</h4>
+        <div class="custom-table-wrapper">
+          <table class="custom-table" id="services-table">
+            <thead>
+              <tr><th>ID</th><th>Tên dịch vụ</th><th>Độ tuổi</th><th>Giá</th><th>Mô tả</th><th>Hình ảnh</th><th>Hành động</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="tab-doctors" class="tab-pane">
+        <div class="form-box">
+          <h4 id="doctor-form-title" style="margin-bottom: 20px; color: var(--primary); font-size: 16px; font-weight: 700;">➕ Thêm Bác sĩ Mới</h4>
+          <form id="doctor-form">
+            <input type="hidden" id="doctor-id">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+              <div class="form-group">
+                <label>Họ và tên bác sĩ:</label>
+                <input type="text" id="doctor-name" class="form-control" required placeholder="Ví dụ: BS. TRẦN VĂN A...">
+              </div>
+              <div class="form-group">
+                <label>Chuyên khoa / Chức danh:</label>
+                <input type="text" id="doctor-specialty" class="form-control" required placeholder="Ví dụ: CK I - SẢN PHỤ KHOA...">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Đường dẫn hình ảnh đại diện:</label>
+              <input type="text" id="doctor-image" class="form-control" placeholder="IMAGE/doctor.jpg...">
+            </div>
+            <div class="form-group">
+              <label>Mô tả chi tiết / Kinh nghiệm / Giới thiệu (Hỗ trợ chèn Ảnh & Video):</label>
+              <div id="doctor-editor-container" style="height: 220px; background: #fff; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;"></div>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+              <button type="submit" class="btn btn-teal" id="btn-save-doctor">Lưu bác sĩ</button>
+              <button type="button" class="btn btn-secondary" id="btn-cancel-edit-doctor" style="display:none;" onclick="resetDoctorForm()">Hủy bỏ</button>
+            </div>
+          </form>
+        </div>
+        <h4 style="margin-bottom: 15px; font-size: 16px; font-weight: 700;">📋 Danh sách bác sĩ hiện hành</h4>
+        <div class="custom-table-wrapper">
+          <table class="custom-table" id="doctors-table">
+            <thead>
+              <tr><th>ID</th><th>Hình ảnh</th><th>Họ và tên</th><th>Chuyên khoa</th><th>Mô tả chi tiết</th><th>Hành động</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="tab-news" class="tab-pane">
+        <div class="form-box">
+          <h4 id="news-form-title" style="margin-bottom: 20px; color: var(--primary); font-size: 16px; font-weight: 700;">➕ Đăng Bài Viết / Tin Tức Mới</h4>
+          <form id="news-form">
+            <input type="hidden" id="news-id">
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+              <div class="form-group">
+                <label>Tiêu đề bài viết:</label>
+                <input type="text" id="news-title" class="form-control" required placeholder="Nhập tiêu đề tin tức...">
+              </div>
+              <div class="form-group">
+                <label>Ngày đăng:</label>
+                <input type="date" id="news-date" class="form-control" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Tóm tắt ngắn:</label>
+              <textarea id="news-summary" class="form-control" rows="2" placeholder="Nhập đoạn tóm tắt..."></textarea>
+            </div>
+            <div class="form-group">
+              <label>Nội dung chi tiết:</label>
+              <textarea id="news-content" class="form-control" rows="5" placeholder="Nhập nội dung đầy đủ..."></textarea>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <button type="submit" class="btn btn-teal" id="btn-save-news">Đăng bài viết</button>
+              <button type="button" class="btn btn-secondary" id="btn-cancel-edit-news" style="display:none;" onclick="resetNewsForm()">Hủy bỏ</button>
+            </div>
+          </form>
+        </div>
+        <div class="custom-table-wrapper">
+          <table class="custom-table" id="news-table">
+            <thead><tr><th>ID</th><th>Tiêu đề</th><th>Tóm tắt</th><th>Ngày đăng</th><th>Hành động</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="tab-customers" class="tab-pane">
+        <div class="filter-box" style="justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <div>
+            <h4 style="margin-bottom: 4px; font-size: 16px;">👥 Quản lý & Tra cứu Hồ sơ Khách hàng</h4>
+            <p style="font-size: 13px; color: var(--text-muted);">Xem thông tin cá nhân và lịch sử tương tác liên quan.</p>
+          </div>
+          <button class="btn btn-teal" onclick="openCustomerModalForAdd()">➕ Thêm khách hàng</button>
+        </div>
+        <div class="filter-box">
+          <input type="text" id="customerSearchInput" placeholder="Tìm kiếm theo tên, số điện thoại hoặc email khách hàng..." class="form-control" onkeyup="filterCustomerTable()">
+          <button class="btn btn-teal" onclick="filterCustomerTable()" style="padding: 0 24px;">Tìm kiếm</button>
+        </div>
+        <div class="custom-table-wrapper">
+          <table class="custom-table" id="customers-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Họ và tên</th>
+                <th>Số điện thoại</th>
+                <th>Email</th>
+                <th>Ngày tạo tài khoản</th>
+                <th>Thao tác chi tiết</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="6" style="text-align: center; color: #888;">Đang tải danh sách khách hàng...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="tab-support" class="tab-pane">
+        <div class="filter-box" style="justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <div>
+            <h4 style="margin-bottom: 4px; font-size: 16px;">💬 Yêu cầu Tư vấn & Hỗ trợ</h4>
+            <p style="font-size: 13px; color: var(--text-muted);">Quản lý và cập nhật trạng thái phản hồi các yêu cầu gửi từ khách hàng.</p>
+          </div>
+          <button class="btn btn-secondary" onclick="loadSupportContacts()" style="background: #f1f5f9; color: #334155; border: 1px solid var(--border-color);">🔄 Làm mới</button>
+        </div>
+        <div class="custom-table-wrapper">
+          <table class="custom-table" id="support-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Họ và tên</th>
+                <th>Liên hệ (SĐT / Email)</th>
+                <th>Nội dung tin nhắn</th>
+                <th>Trạng thái</th>
+                <th>Thời gian gửi</th>
+                <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="7" style="text-align: center; color: #888;">Đang tải danh sách yêu cầu hỗ trợ...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="tab-attendance" class="tab-pane">
+        <div style="max-width: 600px; margin: 40px auto; background: white; padding: 40px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid var(--border-color); text-align: center;">
+          <h2 style="color: var(--primary); margin-bottom: 10px; font-size: 24px;">⏱️ Hệ thống Chấm công</h2>
+          <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 25px;">Vui lòng nhấn nút tương ứng để ghi nhận thời gian vào ca hoặc ra ca làm việc của bạn.</p>
+          
+          <div id="live-clock" style="font-size: 38px; font-weight: 700; color: #1e293b; margin-bottom: 10px; font-family: monospace;">00:00:00</div>
+          <div id="live-date" style="font-size: 15px; color: var(--text-muted); margin-bottom: 30px; font-weight: 500;">Thứ Hai, ngày 01 tháng 01, 2026</div>
+
+          <div style="display: flex; justify-content: center; gap: 20px;">
+            <button class="btn btn-teal" onclick="performCheckIn()" style="padding: 14px 28px; font-size: 15px; border-radius: 8px;">📥 Vào ca (Check-in)</button>
+            <button class="btn btn-warning" onclick="performCheckOut()" style="padding: 14px 28px; font-size: 15px; border-radius: 8px; color: white;">📤 Ra ca (Check-out)</button>
+          </div>
+
+         
+      </section>
+    </main>
+  </div>
+
+  <div id="customerModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-customer-title" style="color: var(--primary); font-size: 18px; font-weight: 700;">Hồ sơ chi tiết khách hàng</h3>
+        <button class="modal-close" onclick="closeCustomerModal()">&times;</button>
+      </div>
+      <div id="modal-customer-body"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
+  <script>
+    const API_URL = 'api.php';
+    const tensv = { "id": 5, "ho_ten": "TRAN VIET DUC", "vai_tro": "Quản trị" };
+
+    let quillDoctorDesc;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const userDisplay = document.getElementById('user-profile-display');
+      if (userDisplay) {
+        userDisplay.innerText = `${tensv.ho_ten} (${tensv.vai_tro})`;
+      }
+
+      const today = new Date().toISOString().split('T')[0];
+      const newsDateInput = document.getElementById('news-date');
+      if(newsDateInput) newsDateInput.value = today;
+
+      const dateLabel = document.getElementById('today-date-label');
+      if(dateLabel) dateLabel.innerText = `Hôm nay: ${today}`;
+
+      quillDoctorDesc = new Quill('#doctor-editor-container', {
+        theme: 'snow',
+        modules: {
+          toolbar: [
+            [{ header: [1, 2, false] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            ['image', 'video', 'link'], 
+            [{ list: 'ordered' }, { list: 'bullet' }],
+            ['clean']
+          ]
+        }
+      });
+
+      startLiveClock();
+
+      loadStaffAppointments();
+      initServiceForm();
+      initNewsForm();
+      initDoctorForm();
+    });
+
+    function startLiveClock() {
+      function updateClock() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        
+        const clockEl = document.getElementById('live-clock');
+        if (clockEl) clockEl.innerText = `${hours}:${minutes}:${seconds}`;
+
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const dateStr = now.toLocaleDateString('vi-VN', options);
+        const dateEl = document.getElementById('live-date');
+        if (dateEl) dateEl.innerText = dateStr;
+      }
+      updateClock();
+      setInterval(updateClock, 1000);
+    }
+
+    document.querySelectorAll('.menu-item').forEach(item => {
+      item.addEventListener('click', function() {
+        document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
+        document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+        this.classList.add('active');
+        const target = this.getAttribute('data-tab');
+        document.getElementById(target).classList.add('active');
+        document.getElementById('current-title').innerText = this.innerText;
+
+        if (target === 'tab-services') loadStaffServices();
+        else if (target === 'tab-doctors') loadStaffDoctors();
+        else if (target === 'tab-news') loadStaffNews();
+        else if (target === 'tab-customers') loadCustomers();
+        else if (target === 'tab-support') loadSupportContacts(); 
+        else if (target === 'tab-attendance') checkTodayAttendanceStatus();
+        else if (target === 'tab-checkin' || target === 'tab-appointments') loadStaffAppointments(); 
+      });
+    });
+
+    async function loadStaffAppointments() {
+      try {
+        const response = await fetch(`${API_URL}?action=get_appointments`);
+        if (response.ok) {
+          const appointments = await response.json();
+          renderCheckinTable(appointments);
+          renderTodayAppointmentsTable(appointments);
+        }
+      } catch (error) { console.error("Lỗi tải lịch hẹn:", error); }
+    }
+
+    function renderCheckinTable(list) {
+      const tbody = document.getElementById('appointmentTableBody');
+      if (!tbody) return;
+      if (!Array.isArray(list) || list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #888;">Không có lịch hẹn nào.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = list.map(item => {
+        let badgeClass = 'badge-pending';
+        let statusText = item.trang_thai || 'Chờ xác nhận';
+        if (statusText === 'Đã đến') badgeClass = 'badge-arrived';
+        else if (statusText === 'Không đến') badgeClass = 'badge-missing';
+        else if (statusText === 'Hủy') badgeClass = 'badge-cancelled';
+
+        return `
+          <tr>
+            <td><strong>${escapeHtml(item.ho_ten || item.fullName || 'Khách lẻ')}</strong><br><small style="color: var(--text-muted);">${escapeHtml(item.email || '')}</small></td>
+            <td>${escapeHtml(item.phone || '')}</td>
+            <td>${escapeHtml(item.service_name || 'Tiêm chủng vắc-xin')}</td>
+            <td><span style="color: var(--primary); font-weight: 600;">${escapeHtml(item.doctor_id || item.doctor_name || 'Chưa chọn bác sĩ')}</span></td>
+            <td>${escapeHtml(item.booking_time || '')} <br><small style="color: var(--text-muted);">(${escapeHtml(item.booking_date || '')})</small></td>
+            <td><span class="badge ${badgeClass}">${statusText}</span></td>
+            <td>
+              <div class="actions">
+                <button class="btn-action btn-arrived" onclick="updateStatus(${item.id}, 'Đã đến')" title="Đã đến">✓</button>
+                <button class="btn-action btn-missing" onclick="updateStatus(${item.id}, 'Không đến')" title="Không đến">✕</button>
+                <button class="btn-action btn-cancel-status" onclick="updateStatus(${item.id}, 'Hủy')" title="Hủy">Hủy</button>
+                <button class="btn-action btn-delete-row" onclick="deleteAppointment(${item.id})" title="Xóa">🗑</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderTodayAppointmentsTable(list) {
+      const tbody = document.getElementById('appointmentTodayTableBody');
+      if (!tbody) return;
+      const todayStr = new Date().toISOString().split('T')[0];
+      const todayList = Array.isArray(list) ? list.filter(item => (item.booking_date || '').startsWith(todayStr)) : [];
+
+      if (todayList.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #888;">Không có lịch hẹn nào trong hôm nay.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = todayList.map(item => {
+        let badgeClass = 'badge-pending';
+        let statusText = item.trang_thai || 'Chờ xác nhận';
+        if (statusText === 'Đã đến') badgeClass = 'badge-arrived';
+        else if (statusText === 'Không đến') badgeClass = 'badge-missing';
+        else if (statusText === 'Hủy') badgeClass = 'badge-cancelled';
+
+        return `
+          <tr>
+            <td><strong>${escapeHtml(item.fullName || item.ho_ten || 'Khách lẻ')}</strong><br><small style="color: var(--text-muted);">${escapeHtml(item.email || '')}</small></td>
+            <td>${escapeHtml(item.phone || '')}</td>
+            <td>${escapeHtml(item.service_name || 'Tiêm chủng vắc-xin')}</td>
+            <td><span style="color: var(--primary); font-weight: 600;">${escapeHtml(item.doctor_id || item.doctor_name || 'Chưa chọn bác sĩ')}</span></td>
+            <td>${escapeHtml(item.booking_time || '')} <br><small style="color: var(--text-muted);">(${escapeHtml(item.booking_date || '')})</small></td>
+            <td><span class="badge ${badgeClass}">${statusText}</span></td>
+            <td>
+              <div class="actions">
+                <button class="btn-action btn-arrived" onclick="updateStatus(${item.id}, 'Đã đến')" title="Đã đến">✓</button>
+                <button class="btn-action btn-missing" onclick="updateStatus(${item.id}, 'Không đến')" title="Không đến">✕</button>
+                <button class="btn-action btn-cancel-status" onclick="updateStatus(${item.id}, 'Hủy')" title="Hủy">Hủy</button>
+                <button class="btn-action btn-delete-row" onclick="deleteAppointment(${item.id})" title="Xóa">🗑</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    async function updateStatus(id, status) {
+      if (!id) return;
+      try {
+        const response = await fetch(`${API_URL}?action=update_appointment_status`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: id, trang_thai: status }) 
+        });
+        const result = await response.json();
+        if (result.success) loadStaffAppointments();
+        else alert("Lỗi: " + (result.message || "Không thể cập nhật"));
+      } catch (e) { alert("Lỗi kết nối máy chủ!"); }
+    }
+
+    async function deleteAppointment(id) {
+      if (!id) return;
+      if (confirm('Bạn có chắc chắn muốn xóa lịch hẹn này không?')) {
+        try {
+          const response = await fetch(`${API_URL}?action=delete_appointment&id=${id}`);
+          const result = await response.json();
+          if (result.success) loadStaffAppointments();
+          else alert('Lỗi xóa lịch hẹn');
+        } catch (error) { alert('Lỗi kết nối máy chủ!'); }
+      }
+    }
+
+    function filterCheckinTable() {
+      let input = document.getElementById('searchInput').value.toLowerCase();
+      let rows = document.getElementById('appointmentTableBody').getElementsByTagName('tr');
+      for (let i = 0; i < rows.length; i++) {
+        rows[i].style.display = rows[i].textContent.toLowerCase().includes(input) ? "" : "none";
+      }
+    }
+
+    async function loadStaffServices() {
+      try {
+        const res = await fetch(`${API_URL}?action=get_all_services`);
+        if (res.ok) {
+          const services = await res.json();
+          const tbody = document.querySelector('#services-table tbody');
+          if (!tbody) return;
+          tbody.innerHTML = services.map(s => `
+            <tr>
+              <td>${s.id}</td>
+              <td><strong>${escapeHtml(s.ten_dich_vu)}</strong></td>
+              <td>${escapeHtml(s.do_tuoi || 'Mọi độ tuổi')}</td>
+              <td><span style="color: var(--primary); font-weight: bold;">${Number(s.gia || 0).toLocaleString()} đ</span></td>
+              <td><div style="max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(s.mo_ta || '')}</div></td>
+              <td>${s.hinh_anh ? `<img src="${escapeHtml(s.hinh_anh)}" style="width:35px;height:35px;object-fit:cover;border-radius:4px;">` : 'Không'}</td>
+              <td>
+                <div class="actions">
+                  <button class="btn btn-warning" style="padding: 5px 10px; font-size: 12px;" onclick='editService(${JSON.stringify(s)})'>Sửa</button>
+                  <button class="btn btn-danger" style="padding: 5px 10px; font-size: 12px;" onclick="deleteService(${s.id})">Xóa</button>
+                </div>
+              </td>
+            </tr>
+          `).join('');
+        }
+      } catch (err) { console.error(err); }
+    }
+
+    function initServiceForm() {
+      const form = document.getElementById('service-form');
+      if (!form) return;
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const serviceId = document.getElementById('service-id').value;
+        const actionType = serviceId ? 'update_service' : 'add_service';
+
+        const bodyData = {
+          id: serviceId ? parseInt(serviceId) : undefined,
+          ten_dich_vu: document.getElementById('service-name').value.trim(),
+          do_tuoi: document.getElementById('service-age').value.trim(),
+          gia: document.getElementById('service-price').value.trim(),
+          gia_cu: document.getElementById('service-old-price').value.trim(),
+          mo_ta: document.getElementById('service-desc').value.trim(),
+          hinh_anh: document.getElementById('service-image').value.trim()
+        };
+
+        const res = await fetch(`${API_URL}?action=${actionType}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(bodyData)
+        });
+        const result = await res.json();
+        if (result.success) {
+          alert(serviceId ? "Cập nhật dịch vụ thành công!" : "Thêm dịch vụ thành công!");
+          resetServiceForm();
+          loadStaffServices();
+        } else { alert("Lỗi: " + result.message); }
+      });
+    }
+
+    function editService(service) {
+      document.getElementById('service-form-title').innerText = "✏️ Cập nhật thông tin dịch vụ";
+      document.getElementById('service-id').value = service.id;
+      document.getElementById('service-name').value = service.ten_dich_vu || '';
+      document.getElementById('service-age').value = service.do_tuoi || '';
+      document.getElementById('service-price').value = service.gia || '';
+      document.getElementById('service-old-price').value = service.gia_cu || '';
+      document.getElementById('service-desc').value = service.mo_ta || '';
+      document.getElementById('service-image').value = service.hinh_anh || '';
+
+      document.getElementById('btn-save-service').innerText = "Cập nhật dịch vụ";
+      document.getElementById('btn-cancel-edit-service').style.display = "inline-block";
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function resetServiceForm() {
+      document.getElementById('service-form-title').innerText = "➕ Thêm Dịch vụ / Gói Vắc-xin Mới";
+      document.getElementById('service-form').reset();
+      document.getElementById('service-id').value = '';
+      document.getElementById('btn-save-service').innerText = "Lưu dịch vụ";
+      document.getElementById('btn-cancel-edit-service').style.display = "none";
+    }
+
+    async function deleteService(id) {
+      if (confirm("Xóa dịch vụ này?")) {
+        const res = await fetch(`${API_URL}?action=delete_service&id=${id}`);
+        const result = await res.json();
+        if (result.success) loadStaffServices();
+      }
+    }
+
+    async function loadStaffDoctors() {
+      try {
+        const res = await fetch(`${API_URL}?action=get_all_doctors`);
+        if (res.ok) {
+          const doctors = await res.json();
+          const tbody = document.querySelector('#doctors-table tbody');
+          if (!tbody) return;
+          
+          if (!Array.isArray(doctors) || doctors.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #888;">Chưa có dữ liệu bác sĩ.</td></tr>';
+            return;
+          }
+
+          tbody.innerHTML = doctors.map(d => {
+            const rawDesc = d.mo_ta_chi_tiet || d.description || d.mo_ta || d.bio || d.chitiet || d.details || d.content || '';
+            const displayDesc = rawDesc.trim() !== ''
+              ? `<div style="max-width:350px; max-height:120px; overflow:auto; white-space:normal; line-height:1.5;">${rawDesc}</div>`
+              : '<span style="color:#94a3b8;font-style:italic;">Chưa có mô tả</span>';
+
+            return `
+              <tr>
+                <td>${d.id}</td>
+                <td>${d.image ? `<img src="${escapeHtml(d.image)}" style="width:40px;height:40px;object-fit:cover;border-radius:50%;">` : 'Không có'}</td>
+                <td><strong>${escapeHtml(d.name)}</strong></td>
+                <td>${escapeHtml(d.specialty || '')}</td>
+                <td>${displayDesc}</td>
+                <td>
+                  <div class="actions">
+                    <button class="btn btn-warning" style="padding: 5px 10px; font-size: 12px;" onclick='editDoctor(${JSON.stringify(d)})'>Sửa</button>
+                    <button class="btn btn-danger" style="padding: 5px 10px; font-size: 12px;" onclick="deleteDoctor(${d.id})">Xóa</button>
+                  </div>
+                </td>
+              </tr>
+            `;
+          }).join('');
+        }
+      } catch (err) { console.error("Lỗi tải bác sĩ:", err); }
+    }
+
+    function initDoctorForm() {
+      const form = document.getElementById("doctor-form");
+      if (!form) return;
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const doctorId = document.getElementById("doctor-id").value;
+        const actionType = doctorId ? "update_doctor" : "add_doctor";
+        const doctorDesc = quillDoctorDesc ? quillDoctorDesc.root.innerHTML : '';
+
+        const bodyData = {
+          id: doctorId ? parseInt(doctorId) : undefined,
+          name: document.getElementById("doctor-name").value.trim(),
+          specialty: document.getElementById("doctor-specialty").value.trim(),
+          image: document.getElementById("doctor-image").value.trim(),
+          mo_ta_chi_tiet: doctorDesc
+        };
+
+        try {
+          const response = await fetch(`${API_URL}?action=${actionType}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(bodyData)
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+            alert(doctorId ? "Cập nhật bác sĩ thành công!" : "Thêm bác sĩ thành công!");
+            resetDoctorForm();
+            loadStaffDoctors();
+          } else {
+            alert("Lỗi: " + result.message);
+          }
+        } catch (err) {
+          console.error(err);
+          alert("Không thể kết nối tới máy chủ!");
+        }
+      });
+    }
+
+    function editDoctor(doctor) {
+      document.getElementById("doctor-id").value = doctor.id;
+      document.getElementById("doctor-name").value = doctor.name;
+      document.getElementById("doctor-specialty").value = doctor.specialty;
+      document.getElementById("doctor-image").value = doctor.image;
+
+      const rawDesc = doctor.mo_ta_chi_tiet || doctor.description || doctor.mo_ta || '';
+      if (quillDoctorDesc) {
+        quillDoctorDesc.root.innerHTML = rawDesc;
+      }
+
+      document.getElementById("doctor-form-title").innerText = "✏️ Cập nhật bác sĩ";
+      document.getElementById("btn-cancel-edit-doctor").style.display = "inline-block";
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function resetDoctorForm() {
+      document.getElementById("doctor-form").reset();
+      document.getElementById("doctor-id").value = "";
+      if (quillDoctorDesc) {
+        quillDoctorDesc.setContents([]);
+      }
+      document.getElementById("doctor-form-title").innerText = "➕ Thêm Bác sĩ Mới";
+      document.getElementById("btn-cancel-edit-doctor").style.display = "none";
+    }
+
+    async function deleteDoctor(id) {
+      if (confirm("Bạn có chắc chắn muốn xóa bác sĩ này không?")) {
+        try {
+          const res = await fetch(`${API_URL}?action=delete_doctor&id=${id}`);
+          const result = await res.json();
+          if (result.success) loadStaffDoctors();
+          else alert("Lỗi khi xóa bác sĩ.");
+        } catch (err) { alert("Lỗi kết nối máy chủ!"); }
+      }
+    }
+
+    async function loadStaffNews() {
+      try {
+        const res = await fetch(`${API_URL}?action=get_all_news`);
+        if (res.ok) {
+          const newsList = await res.json();
+          const tbody = document.querySelector('#news-table tbody');
+          if (!tbody) return;
+          tbody.innerHTML = newsList.map(n => `
+            <tr>
+              <td>${n.id}</td>
+              <td><strong>${escapeHtml(n.tieu_de)}</strong></td>
+              <td>${escapeHtml(n.tom_tat || '')}</td>
+              <td>${escapeHtml(n.ngay_dang || '')}</td>
+              <td>
+                <div class="actions">
+                  <button class="btn btn-warning" style="padding: 5px 10px; font-size: 12px;" onclick='editNews(${JSON.stringify(n)})'>Sửa</button>
+                  <button class="btn btn-danger" style="padding: 5px 10px; font-size: 12px;" onclick="deleteNews(${n.id})">Xóa</button>
+                </div>
+              </td>
+            </tr>
+          `).join('');
+        }
+      } catch (err) { console.error(err); }
+    }
+
+    function initNewsForm() {
+      const form = document.getElementById('news-form');
+      if (!form) return;
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const newsId = document.getElementById('news-id').value;
+        const actionType = newsId ? 'update_news' : 'add_news';
+
+        const bodyData = {
+          id: newsId ? parseInt(newsId) : undefined,
+          tieu_de: document.getElementById('news-title').value.trim(),
+          tom_tat: document.getElementById('news-summary').value.trim(),
+          noi_dung: document.getElementById('news-content').value.trim(),
+          ngay_dang: document.getElementById('news-date').value.trim(),
+          hinh_anh: ''
+        };
+
+        const res = await fetch(`${API_URL}?action=${actionType}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(bodyData)
+        });
+        const result = await res.json();
+        if (result.success) {
+          alert(newsId ? "Cập nhật tin tức thành công!" : "Đăng tin thành công!");
+          resetNewsForm();
+          loadStaffNews();
+        } else { alert("Lỗi: " + result.message); }
+      });
+    }
+
+    function editNews(news) {
+      document.getElementById('news-form-title').innerText = "✏️ Cập nhật Bài Viết / Tin Tức";
+      document.getElementById('news-id').value = news.id;
+      document.getElementById('news-title').value = news.tieu_de || '';
+      document.getElementById('news-date').value = news.ngay_dang || new Date().toISOString().split('T')[0];
+      document.getElementById('news-summary').value = news.tom_tat || '';
+      document.getElementById('news-content').value = news.noi_dung || '';
+
+      document.getElementById('btn-save-news').innerText = "Cập nhật bài viết";
+      document.getElementById('btn-cancel-edit-news').style.display = "inline-block";
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function resetNewsForm() {
+      document.getElementById('news-form-title').innerText = "➕ Đăng Bài Viết / Tin Tức Mới";
+      document.getElementById('news-form').reset();
+      document.getElementById('news-id').value = '';
+      document.getElementById('news-date').value = new Date().toISOString().split('T')[0];
+      document.getElementById('btn-save-news').innerText = "Đăng bài viết";
+      document.getElementById('btn-cancel-edit-news').style.display = "none";
+    }
+
+    async function deleteNews(id) {
+      if (confirm("Xóa tin này?")) {
+        const res = await fetch(`${API_URL}?action=delete_news&id=${id}`);
+        const result = await res.json();
+        if (result.success) loadStaffNews();
+      }
+    }
+
+    async function loadCustomers() {
+      try {
+        const res = await fetch(`${API_URL}?action=get_all_customers`);
+        if (res.ok) {
+          const customers = await res.json();
+          const tbody = document.querySelector('#customers-table tbody');
+          if (!tbody) return;
+          
+          if (!Array.isArray(customers) || customers.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #888;">Chưa có dữ liệu khách hàng.</td></tr>';
+            return;
+          }
+
+          tbody.innerHTML = customers.map(c => `
+            <tr>
+              <td>${c.id}</td>
+              <td><strong>${escapeHtml(c.ho_ten || 'Chưa cập nhật')}</strong></td>
+              <td>${escapeHtml(c.so_dien_thoai || 'N/A')}</td>
+              <td>${escapeHtml(c.email || 'N/A')}</td>
+              <td>${escapeHtml(c.ngay_tao || 'N/A')}</td>
+              <td>
+                <button class="btn btn-teal" style="padding: 6px 12px; font-size: 12px;" onclick='viewCustomerDetail(${JSON.stringify(c)})'>👁️ Xem chi tiết</button>
+              </td>
+            </tr>
+          `).join('');
+        }
+      } catch (err) { console.error("Lỗi tải danh sách khách hàng:", err); }
+    }
+
+    function filterCustomerTable() {
+      let input = document.getElementById('customerSearchInput').value.toLowerCase();
+      let rows = document.querySelector('#customers-table tbody').getElementsByTagName('tr');
+      for (let i = 0; i < rows.length; i++) {
+        rows[i].style.display = rows[i].textContent.toLowerCase().includes(input) ? "" : "none";
+      }
+    }
+
+    async function viewCustomerDetail(customer) {
+      const modal = document.getElementById('customerModal');
+      const titleEl = document.getElementById('modal-customer-title');
+      const bodyContent = document.getElementById('modal-customer-body');
+
+      titleEl.innerText = `Hồ sơ chi tiết: ${customer.ho_ten || 'Khách hàng'}`;
+      bodyContent.innerHTML = `
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; background: #f8fafc; padding: 16px; border-radius: 8px; font-size: 14px; border: 1px solid var(--border-color);">
+          <div><p><strong>Mã khách hàng:</strong> #${customer.id}</p></div>
+          <div><p><strong>Số điện thoại:</strong> ${escapeHtml(customer.so_dien_thoai || 'Không có')}</p></div>
+          <div><p><strong>Email liên hệ:</strong> ${escapeHtml(customer.email || 'Không có')}</p></div>
+          <div style="grid-column: span 2;"><p><strong>Địa chỉ:</strong> ${escapeHtml(customer.dia_chi || 'Chưa cập nhật')}</p></div>
+        </div>
+        <h4 style="margin-bottom: 12px; color: #1e293b; font-size: 15px; border-bottom: 2px solid var(--primary); padding-bottom: 6px;">💉 Lịch sử Tiêm chủng & Giao dịch</h4>
+        <div id="customer-history-loading" style="padding: 10px 0; color: var(--text-muted);">Đang tải dữ liệu tương tác...</div>
+        <div id="customer-history-content"></div>
+      `;
+      modal.style.display = 'flex';
+
+      try {
+        const res = await fetch(`${API_URL}?action=get_appointments`);
+        if (res.ok) {
+          const allAppointments = await res.json();
+          const cusAppointments = allAppointments.filter(app => {
+            return (customer.so_dien_thoai && app.phone === customer.so_dien_thoai) || 
+                   ((app.fullName || app.ho_ten || '').toLowerCase() === (customer.ho_ten || '').toLowerCase());
+          });
+
+          document.getElementById('customer-history-loading').style.display = 'none';
+          const historyContent = document.getElementById('customer-history-content');
+
+          if (cusAppointments.length === 0) {
+            historyContent.innerHTML = `<p style="color: var(--text-muted); font-style: italic; padding: 10px 0;">Khách hàng này chưa có lịch hẹn nào trên hệ thống.</p>`;
+          } else {
+            historyContent.innerHTML = `
+              <div class="custom-table-wrapper" style="box-shadow: none; border: 1px solid var(--border-color);">
+                <table class="custom-table" style="font-size: 13px;">
+                  <thead>
+                    <tr><th>Dịch vụ</th><th>Bác sĩ</th><th>Thời gian hẹn</th><th>Loại giao dịch</th><th>Trạng thái</th></tr>
+                  </thead>
+                  <tbody>
+                    ${cusAppointments.map(app => `
+                      <tr>
+                        <td>${escapeHtml(app.service_name || 'Tiêm chủng')}</td>
+                        <td><span style="color: var(--primary); font-weight: 600;">${escapeHtml(app.doctor_id || app.doctor_name || 'Chưa chọn')}</span></td>
+                        <td>${escapeHtml(app.booking_date || '')} (${escapeHtml(app.booking_time || '')})</td>
+                        <td><span style="font-weight: 600; color: #475569;">${escapeHtml(app.loai_giao_dich || 'Lịch tiêm')}</span></td>
+                        <td><span class="badge badge-arrived">${escapeHtml(app.trang_thai || 'Chờ xác nhận')}</span></td>
+                      </tr>
+                    `).join('')}
+                  </tbody>
+                </table>
+              </div>
+            `;
+          }
+        }
+      } catch (e) { console.error(e); }
+    }
+
+    function openCustomerModalForAdd() {
+      const modal = document.getElementById('customerModal');
+      document.getElementById('modal-customer-title').innerText = "➕ Thêm mới hồ sơ khách hàng";
+      document.getElementById('modal-customer-body').innerHTML = `
+        <form id="add-customer-form" onsubmit="submitNewCustomer(event)">
+          <div class="form-group">
+            <label>Họ và tên khách hàng:</label>
+            <input type="text" id="new-cus-name" class="form-control" required placeholder="Nhập họ tên...">
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="form-group">
+              <label>Số điện thoại:</label>
+              <input type="text" id="new-cus-phone" class="form-control" required placeholder="Nhập SĐT...">
+            </div>
+            <div class="form-group">
+              <label>Email:</label>
+              <input type="email" id="new-cus-email" class="form-control" placeholder="Nhập email...">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Địa chỉ:</label>
+            <input type="text" id="new-cus-address" class="form-control" placeholder="Nhập địa chỉ khách hàng...">
+          </div>
+          <button type="submit" class="btn btn-teal" style="margin-top: 10px;">Lưu thông tin khách hàng</button>
+        </form>
+      `;
+      modal.style.display = 'flex';
+    }
+
+    async function submitNewCustomer(e) {
+      e.preventDefault();
+      const payload = {
+        ho_ten: document.getElementById('new-cus-name').value.trim(),
+        so_dien_thoai: document.getElementById('new-cus-phone').value.trim(),
+        email: document.getElementById('new-cus-email').value.trim(),
+        dia_chi: document.getElementById('new-cus-address').value.trim()
+      };
+
+      try {
+        const res = await fetch(`${API_URL}?action=add_customer`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+        if (result.success) {
+          alert("Thêm khách hàng thành công!");
+          closeCustomerModal();
+          loadCustomers();
+        } else { alert("Lỗi: " + (result.message || "Không thể thêm khách hàng")); }
+      } catch (err) { alert("Lỗi kết nối máy chủ!"); }
+    }
+
+    function closeCustomerModal() {
+      document.getElementById('customerModal').style.display = 'none';
+    }
+
+    async function loadSupportContacts() {
+      const tbody = document.querySelector('#support-table tbody');
+      if (!tbody) return;
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #888;">Đang tải dữ liệu...</td></tr>';
+
+      try {
+        const res = await fetch(`${API_URL}?action=get_contacts`);
+        if (res.ok) {
+          const list = await res.json();
+          if (!Array.isArray(list) || list.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #888;">Chưa có yêu cầu hỗ trợ nào.</td></tr>';
+            return;
+          }
+
+          tbody.innerHTML = list.map(item => {
+            const statusClass = item.trang_thai === 'Đã trả lời' ? 'badge-arrived' : 'badge-pending';
+            return `
+              <tr>
+                <td>${item.id}</td>
+                <td><strong>${escapeHtml(item.ho_ten)}</strong></td>
+                <td>📞 ${escapeHtml(item.so_dien_thoai)}<br><small style="color: var(--text-muted);">✉️ ${escapeHtml(item.email || 'Không có')}</small></td>
+                <td><div style="max-width: 250px; white-space: pre-wrap; word-break: break-word;">${escapeHtml(item.tin_nhan)}</div></td>
+                <td><span class="badge ${statusClass}">${escapeHtml(item.trang_thai || 'Chưa trả lời')}</span></td>
+                <td><small style="color: var(--text-muted);">${escapeHtml(item.ngay_gui || '')}</small></td>
+                <td>
+                  <div class="actions">
+                    <button class="btn-action btn-arrived" onclick="updateContactStatus(${item.id}, 'Đã trả lời')" title="Đã trả lời">✓</button>
+                    <button class="btn-action btn-delete-row" onclick="deleteContact(${item.id})" title="Xóa">🗑</button>
+                  </div>
+                </td>
+              </tr>
+            `;
+          }).join('');
+        }
+      } catch (err) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #ef4444;">Lỗi kết nối khi tải dữ liệu.</td></tr>';
+      }
+    }
+
+    async function updateContactStatus(id, status) {
+      if (!id) return;
+      try {
+        const res = await fetch(`${API_URL}?action=update_contact_status`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: id, trang_thai: status })
+        });
+        const result = await res.json();
+        if (result.success) loadSupportContacts();
+        else alert("Lỗi: " + (result.message || "Không thể cập nhật trạng thái"));
+      } catch (e) { alert("Lỗi kết nối máy chủ!"); }
+    }
+
+    async function deleteContact(id) {
+      if (!id) return;
+      if (confirm("Bạn có chắc chắn muốn xóa yêu cầu tư vấn này không?")) {
+        try {
+          const res = await fetch(`${API_URL}?action=delete_contact&id=${id}`);
+          const result = await res.json();
+          if (result.success) loadSupportContacts();
+          else alert("Lỗi xóa yêu cầu tư vấn");
+        } catch (error) { alert("Lỗi kết nối máy chủ!"); }
+      }
+    }
+
+    async function checkTodayAttendanceStatus() {
+      const todayStr = new Date().toISOString().split('T')[0];
+      const statusBox = document.getElementById('attendance-status-box');
+      const statusText = document.getElementById('attendance-status-text');
+      
+      try {
+        const res = await fetch(`${API_URL}?action=get_attendance`);
+        if (res.ok) {
+          const list = await res.json();
+          if (Array.isArray(list)) {
+            const myRecord = list.find(item => String(item.nhan_vien_id) === String(tensv.id) && item.ngay_cham_cong === todayStr);
+            if (myRecord) {
+              statusBox.style.display = 'block';
+              statusText.innerHTML = `Đã vào ca lúc: <strong style="color: #0d9488;">${myRecord.gio_vao || '--:--'}</strong> | Ra ca lúc: <strong style="color: #f59e0b;">${myRecord.gio_ra || 'Chưa ra ca'}</strong> | Trạng thái: <strong>${myRecord.trang_thai || 'Đang làm việc'}</strong>`;
+            } else {
+              statusBox.style.display = 'block';
+              statusText.innerHTML = `<span style="color: #64748b; font-style: italic;">Hôm nay bạn chưa thực hiện vào ca.</span>`;
+            }
+          }
+        }
+      } catch (e) {
+        console.error("Lỗi kiểm tra trạng thái chấm công:", e);
+      }
+    }
+
+    async function performCheckIn() {
+      const now = new Date();
+      const payload = {
+        nhan_vien_id: tensv.id,
+        ten_nhan_vien: tensv.ho_ten,
+        ngay_cham_cong: now.toISOString().split('T')[0],
+        gio_vao: now.toTimeString().split(' ')[0],
+        trang_thai: 'Đang làm việc'
+      };
+
+      try {
+        const res = await fetch(`${API_URL}?action=check_in`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+        if (result.success) {
+          alert("Vào ca (Check-in) thành công lúc " + payload.gio_vao);
+          checkTodayAttendanceStatus();
+        } else {
+          alert("Lỗi: " + (result.message || "Không thể thực hiện vào ca"));
+        }
+      } catch (e) {
+        alert("Lỗi kết nối máy chủ!");
+      }
+    }
+
+    async function performCheckOut() {
+      const now = new Date();
+      const payload = {
+        nhan_vien_id: tensv.id,
+        ngay_cham_cong: now.toISOString().split('T')[0],
+        gio_ra: now.toTimeString().split(' ')[0],
+        trang_thai: 'Hoàn thành'
+      };
+
+      try {
+        const res = await fetch(`${API_URL}?action=check_out`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+        if (result.success) {
+          alert("Ra ca (Check-out) thành công lúc " + payload.gio_ra);
+          checkTodayAttendanceStatus();
+        } else {
+          alert("Lỗi: " + (result.message || "Không thể thực hiện ra ca"));
+        }
+      } catch (e) {
+        alert("Lỗi kết nối máy chủ!");
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('user');
+      window.location.href = 'index.html';
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+  </script>
+</body>
+</html>

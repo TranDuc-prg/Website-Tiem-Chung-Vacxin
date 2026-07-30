@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng nhập / Đăng ký - Medivax</title>
+  
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/login.css">
+
+</head>
+<body>
+
+  <div class="auth-container">
+    <div class="auth-tabs">
+      <div class="auth-tab active" id="tab-login">Đăng Nhập</div>
+      <div class="auth-tab" id="tab-register">Đăng Ký Khách Hàng</div>
+    </div>
+
+    <div id="alert-box" class="alert-msg hidden"></div>
+
+    <form id="login-form" class="auth-form" autocomplete="off">
+      <h3>Đăng Nhập</h3>
+      <input type="email" id="login-email" placeholder="Email" required>
+      <input type="password" id="login-password" placeholder="Mật khẩu" required>
+      <button type="submit" class="btn-primary">ĐĂNG NHẬP</button>
+    </form>
+
+    <form id="register-form" class="auth-form hidden" autocomplete="off">
+      <h3>Đăng Ký Khách Hàng</h3>
+      <input type="text" id="reg-name" placeholder="Họ và tên" required>
+      <input type="tel" id="reg-phone" placeholder="Số điện thoại" required>
+      <input type="email" id="reg-email" placeholder="Email" required>
+      <input type="password" id="reg-password" placeholder="Mật khẩu (tối thiểu 6 ký tự)" minlength="6" required>
+      <button type="submit" class="btn-primary">ĐĂNG KÝ</button>
+    </form>
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>

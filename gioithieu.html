@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giới thiệu - Phòng Khám & Tiêm Chủng Medivax</title>
+  <link rel="stylesheet" href="CSS/index.css">
+  <style>
+    .page-content-wrapper {
+      padding: 40px 0;
+      background-color: #f8fafc;
+    }
+    .layout-grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 30px;
+    }
+    @media (max-width: 900px) {
+      .layout-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .main-article {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+      border: 1px solid #f1f5f9;
+    }
+    .main-article h2 {
+      font-size: 24px;
+      color: #1e293b;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+    .main-article h3 {
+      font-size: 18px;
+      color: #0284c7;
+      margin-top: 25px;
+      margin-bottom: 12px;
+    }
+    .main-article p {
+      color: #334155;
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 15px;
+    }
+    .main-article ul {
+      margin-bottom: 15px;
+      padding-left: 20px;
+      color: #334155;
+    }
+    .main-article li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+
+    .sidebar-widget {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+      border: 1px solid #f1f5f9;
+    }
+    .sidebar-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #dc2626;
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f1f5f9;
+    }
+    .side-news-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px dashed #e2e8f0;
+      align-items: center;
+      text-decoration: none;
+    }
+    .side-news-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .side-news-item img {
+      width: 70px;
+      height: 55px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+    .side-news-item h4 {
+      font-size: 13px;
+      color: #1e293b;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .side-news-item h4:hover {
+      color: #0284c7;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="container">
+      <div>
+        <span>📍 ĐỊA CHỈ: Tầng 1 - Số 152 Xã Đàn - Phường Phương Liên - Đống Đa - HN</span>
+        <span>⏰ MỞ CỬA: 8:00 - 20:00 (Kể cả T7 - CN)</span>
+      </div>
+      <div>
+        <span>📞 HOTLINE: 024.367.88888 - 082.999.2020</span>
+      </div>
+    </div>
+  </div>
+
+  <header class="main-header">
+    <div class="container">
+      <div class="logo">
+        <h1>MEDIVAX</h1>
+        <span>DESIGNED BY TRAN VIET DUC</span>
+      </div>
+      <nav class="nav-menu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="gioithieu.html" class="active">Giới thiệu</a></li>
+          <li><a href="tintuc.html">Tin tức</a></li>
+          <li><a href="dich-vu.html">Dịch vụ</a></li>
+          <li><a href="lien-he.html">Liên hệ</a></li>
+        </ul>
+      </nav>
+      <div class="nav-auth" style="display:flex; align-items:center; gap:10px;">
+        <a href="login.html" id="btn-login-header" class="btn-primary">ĐĂNG NHẬP / ĐĂNG KÝ</a>
+        <span id="header-user-name" style="font-weight:bold; display:none;"></span>
+        <button id="btn-logout-header" class="btn-primary" style="display:none; background:#dc3545;">Đăng xuất</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-content-wrapper">
+    <div class="container">
+      <div class="layout-grid">
+        
+        <aside>
+          <div class="sidebar-widget" style="background: #ffb703;">
+            <h3 style="color: #1e293b; text-align: center; margin-bottom: 15px; font-size: 18px; text-transform: uppercase;">ĐẶT LỊCH KHÁM</h3>
+            <form id="sidebar-booking-form" style="display: flex; flex-direction: column; gap: 12px;">
+              <input type="text" id="side-name" class="form-control" placeholder="Họ và tên" required style="width: 100%; padding: 10px; border-radius: 6px; border: none;">
+              <select id="side-doctor" class="form-control" required style="width: 100%; padding: 10px; border-radius: 6px; border: none;">
+                <option value="">Chọn bác sĩ</option>
+              </select>
+              <input type="email" id="side-email" class="form-control" placeholder="Email" required style="width: 100%; padding: 10px; border-radius: 6px; border: none;">
+              <select id="side-service" class="form-control" required style="width: 100%; padding: 10px; border-radius: 6px; border: none;">
+                <option value="">Chọn dịch vụ / Vắc-xin</option>
+              </select>
+              <input type="tel" id="side-phone" class="form-control" placeholder="Số điện thoại" required style="width: 100%; padding: 10px; border-radius: 6px; border: none;">
+              
+              <input type="text" id="side-address" class="form-control" placeholder="Địa chỉ (ví dụ: Đống Đa, Hà Nội)" required style="width: 100%; padding: 10px; border-radius: 6px; border: none;">
+
+              <input type="date" id="side-date" class="form-control" required style="width: 100%; padding: 10px; border-radius: 6px; border: none;">
+              <select id="side-time" class="form-control" required style="width: 100%; padding: 10px; border-radius: 6px; border: none;">
+                <option value="">Chọn giờ</option>
+              </select>
+              <button type="submit" class="btn-primary" style="background: #1e293b; color: #fff; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer;">ĐĂNG KÝ KHÁM</button>
+            </form>
+          </div>
+
+          <div class="sidebar-widget">
+            <div class="sidebar-title">BÀI VIẾT MỚI</div>
+            <div id="sidebar-news-container">
+            </div>
+          </div>
+        </aside>
+
+        <main class="main-article">
+          <h2>GIỚI THIỆU PHÒNG KHÁM ĐA KHOA & TIÊM CHỦNG MEDIVAX</h2>
+          
+          <p><strong>Phòng khám Đa khoa & Tiêm chủng Medivax</strong> được thành lập với sứ mệnh chăm sóc sức khỏe toàn diện cho người dân, chịu trách nhiệm chuyên môn về việc khám chữa bệnh, phòng bệnh, chăm sóc và tư vấn sức khỏe chuẩn quốc tế[cite: 14].</p>
+          
+          <p>Phòng khám quy tụ đội ngũ chuyên gia đầu ngành, các giáo sư, bác sĩ giàu kinh nghiệm, đa số được đào tạo ở nước ngoài, thường xuyên cập nhật kiến thức, phương pháp chăm sóc sức khỏe và kỹ thuật y khoa tiên tiến, hiện đại, với phương châm <em>“lấy người bệnh làm trung tâm của hoạt động chăm sóc, dự phòng và điều trị”</em>[cite: 14].</p>
+
+          <h3>Hệ thống chuyên khoa toàn diện</h3>
+          <p>Phòng khám sở hữu cơ sở vật chất khang trang tọa lạc tại trung tâm Hà Nội, đáp ứng đầy đủ các chuyên khoa[cite: 14]:</p>
+          <ul>
+            <li>Khám tổng quát, nội tổng mạch, nội thần kinh, ngoại tổng quát[cite: 14].</li>
+            <li>Sản phụ khoa, nhi khoa, tai mũi họng, da liễu, mắt, cơ xương khớp[cite: 14].</li>
+            <li>Trung tâm tiêm chủng vắc xin cao cấp cho mọi lứa tuổi từ trẻ em đến người lớn và phụ nữ mang thai[cite: 14].</li>
+            <li>Đơn vị cận lâm sàng hiện đại: Xét nghiệm tự động, chẩn đoán hình ảnh siêu âm 4D/5D, X-quang kỹ thuật số và đo chức năng hô hấp[cite: 14].</li>
+          </ul>
+
+          <h3>Mô hình Bác sĩ gia đình tận tâm</h3>
+          <p>Bên cạnh các chuyên khoa trên, Medivax đặc biệt chú trọng phát triển mô hình <strong>Bác sĩ gia đình</strong>. Tại đây, mỗi khách hàng sẽ được tiếp cận và phục vụ hoàn toàn khác biệt: ân cần, lắng nghe, thấu hiểu, tạo mối quan hệ gắn gũi như “bác sĩ riêng”, giúp theo dõi sát sao bệnh tật, sức khỏe, tâm lý, thói quen và lối sống của từng thành viên trong gia đình[cite: 14].</p>
+
+          <h3>Quyền lợi khi đến với Medivax</h3>
+          <ul>
+            <li>Được chào đón trong 1 môi trường thoải mái và thân thiện, sắp đặt lịch khám và tư vấn theo yêu cầu, không phải chờ đợi lâu[cite: 14].</li>
+            <li>Hệ thống phần mềm quản lý bệnh án điện tử thông minh, lưu trữ lịch sử tiêm chủng và khám chữa bệnh suốt đời[cite: 14].</li>
+            <li>Cam kết nguồn gốc vắc xin chính hãng, bảo quản theo tiêu chuẩn GSP nghiêm ngặt nhất[cite: 14].</li>
+          </ul>
+
+          <h3>Thông tin liên hệ</h3>
+          <p>📍 <strong>Cơ sở chính:</strong> Tầng 1 - Số 152 Xã Đàn - Phường Phương Liên - Đống Đa - Hà Nội</p>
+          <p>📞 <strong>Hotline:</strong> 024.367.88888 - 082.999.2020</p>
+          <p>⏰ <strong>Thời gian làm việc:</strong> Thứ Hai đến Chủ Nhật (8h00 – 20h00)</p>
+        </main>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>GIỚI THIỆU PHÒNG KHÁM</h4>
+          <p>Phòng khám được đầu tư cơ sở vật chất khang trang, hiện đại đảm bảo hiệu quả điều trị và tiêm chủng luôn cao nhất, hoàn thành sứ mệnh chăm sóc sức khỏe cộng đồng.</p>
+        </div>
+        <div class="footer-col">
+          <h4>DANH MỤC TIÊM CHỦNG</h4>
+          <ul>
+            <li>• Vắc xin trẻ em toàn diện</li>
+            <li>• Vắc xin tuổi vị thành niên</li>
+            <li>• Vắc xin phụ nữ chuẩn bị mang thai</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>LIÊN HỆ</h4>
+          <p>Lịch làm việc: Thứ 2 – Chủ nhật</p>
+          <p>Giờ mở cửa: 8h00 – 20h00</p>
+        </div>
+        <div class="footer-col">
+          <h4>BẢN ĐỒ GOOGLE MAP</h4>
+          <div style="width: 100%; height: 140px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.321!2d105.836!3d21.011!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zWsOhIERjYW4sIMSQ4buRbmcgxJBhLCBIw6AgTuG7mWk!5e0!3m2!1svi!2s!4v1700000000000!5m2!1svi!2s" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="strict-origin-when-cross-origin">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="bottom-notice">
+    Dữ liệu trên website demo là tham khảo, được thiết kế bởi Tran Viet Duc[cite: 14].
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const sideTimeSelect = document.getElementById('side-time');
+      if (sideTimeSelect) {
+        const times = ["08:00 - 09:00", "09:00 - 10:00", "10:00 - 11:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00"];
+        sideTimeSelect.innerHTML = '<option value="">Chọn giờ</option>' + times.map(t => `<option value="${t}">${t}</option>`).join('');
+      }
+
+      const sideDoctorSelect = document.getElementById('side-doctor');
+      try {
+        const resDoc = await fetch('api.php?action=get_all_doctors');
+        if (resDoc.ok) {
+          const doctors = await resDoc.json();
+          if (Array.isArray(doctors) && sideDoctorSelect) {
+            sideDoctorSelect.innerHTML = '<option value="">Chọn bác sĩ</option>' + 
+              doctors.map(doc => `<option value="${doc.id}">${doc.name} (${doc.specialty || 'Bác sĩ'})</option>`).join('');
+          }
+        }
+      } catch (e) {
+        console.error("Lỗi tải bác sĩ cho sidebar:", e);
+      }
+
+      const sideServiceSelect = document.getElementById('side-service');
+      try {
+        const resServ = await fetch('api.php?action=get_all_services');
+        if (resServ.ok) {
+          const servs = await resServ.json();
+          if (Array.isArray(servs) && sideServiceSelect) {
+            sideServiceSelect.innerHTML = '<option value="">Chọn dịch vụ / Vắc-xin</option>' + 
+              servs.map(s => `<option value="${s.id}" data-name="${s.ten_dich_vu}">${s.ten_dich_vu} (${Number(s.gia || 0).toLocaleString('vi-VN')} đ)</option>`).join('');
+          }
+        }
+      } catch (e) {
+        console.error("Lỗi tải dịch vụ cho sidebar:", e);
+      }
+
+      const sidebarNewsContainer = document.getElementById('sidebar-news-container');
+      if (sidebarNewsContainer) {
+        try {
+          const resNews = await fetch('api.php?action=get_all_news');
+          if (resNews.ok) {
+            const newsList = await resNews.json();
+            if (Array.isArray(newsList) && newsList.length > 0) {
+              sidebarNewsContainer.innerHTML = newsList.slice(0, 4).map(item => `
+                <a href="news-detail.html?id=${item.id}" class="side-news-item">
+                  <img src="${item.hinh_anh || 'IMAGE/anh1.png'}" alt="${item.tieu_de}">
+                  <div><h4>${item.tieu_de}</h4></div>
+                </a>
+              `).join('');
+            } else {
+              sidebarNewsContainer.innerHTML = '<p style="font-size:13px; color:#64748b; text-align:center;">Chưa có bài viết mới.</p>';
+            }
+          }
+        } catch (e) {
+          console.error("Lỗi tải bài viết mới:", e);
+        }
+      }
+
+      const sideBookingForm = document.getElementById('sidebar-booking-form');
+      if (sideBookingForm) {
+        sideBookingForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          let currentCustomerId = null;
+          const loggedUser = localStorage.getItem('medivax_user') || sessionStorage.getItem('medivax_user');
+          if (loggedUser) {
+            try {
+              const userData = JSON.parse(loggedUser);
+              currentCustomerId = userData.id || userData.customer_id || null;
+            } catch (err) {
+              console.error("Lỗi đọc thông tin user đăng nhập", err);
+            }
+          }
+
+          const serviceSelectElement = document.getElementById('side-service');
+          let selectedServiceName = "";
+          if (serviceSelectElement && serviceSelectElement.selectedIndex > 0) {
+            const selectedOption = serviceSelectElement.options[serviceSelectElement.selectedIndex];
+            selectedServiceName = selectedOption.getAttribute('data-name') || selectedOption.text;
+          }
+
+          const bookingData = {
+            customer_id: currentCustomerId,
+            fullName: document.getElementById('side-name').value.trim(),
+            doctor_id: document.getElementById('side-doctor').value,
+            email: document.getElementById('side-email').value.trim(),
+            service_id: document.getElementById('side-service').value,
+            chi_tiet_don_hang: selectedServiceName,
+            phone: document.getElementById('side-phone').value.trim(),
+            dia_chi: document.getElementById('side-address').value.trim(),
+            booking_date: document.getElementById('side-date').value,
+            booking_time: document.getElementById('side-time').value
+          };
+
+          try {
+            const response = await fetch('api.php?action=create_appointment', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(bookingData)
+            });
+
+            if (response.ok) {
+              const result = await response.json();
+              if (result.success) {
+                alert(result.message || 'Đặt lịch hẹn / Giữ vắc-xin thành công!');
+                sideBookingForm.reset();
+              } else {
+                alert(result.message || 'Đặt lịch thất bại.');
+              }
+            } else {
+              alert('Đặt lịch thất bại, vui lòng thử lại sau.');
+            }
+          } catch (error) {
+            console.error('Lỗi khi đặt lịch:', error);
+            alert('Không thể kết nối tới máy chủ.');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi tiết bài viết - Medivax</title>
+   <link rel="stylesheet" href="CSS/index.css">
+  <link rel="stylesheet" href="CSS/dich-vu.css">
+  <link rel="stylesheet" href="CSS/service-detail.css">
+  
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: #f4f6f8; color: #333; line-height: 1.6; }
+
+
+    header { background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 1000; }
+    .nav-container { max-width: 1200px; margin: 0 auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 22px; font-weight: bold; color: #0d9488; text-decoration: none; }
+    .nav-links { display: flex; gap: 25px; list-style: none; align-items: center; }
+    .nav-links a { text-decoration: none; color: #475569; font-weight: 600; font-size: 15px; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: #0d9488; }
+    .btn-appointment-nav { background: #f59e0b; color: white !important; padding: 10px 18px; border-radius: 4px; font-weight: bold; }
+
+
+    .top-bar { background: #1e293b; color: #cbd5e1; font-size: 13px; padding: 8px 20px; }
+    .top-bar-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+
+
+    .main-layout {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 30px;
+    }
+
+
+    .sidebar-left { display: flex; flex-direction: column; gap: 30px; }
+    
+    .booking-box {
+      background: #ffffff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      border-top: 4px solid #f59e0b;
+    }
+    .booking-header {
+      background: #f59e0b;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-weight: bold;
+      font-size: 16px;
+      text-transform: uppercase;
+    }
+    .booking-form { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .booking-form input, .booking-form select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      font-size: 14px;
+      background: #fff;
+    }
+    .btn-booking-submit {
+      background: #f59e0b;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .btn-booking-submit:hover { background: #d97706; }
+
+    .recent-posts-box {
+      background: #ffffff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      border-top: 4px solid #dc2626;
+    }
+    .recent-posts-header {
+      background: #ffffff;
+      color: #dc2626;
+      text-align: center;
+      padding: 15px;
+      font-weight: bold;
+      font-size: 16px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .recent-list { padding: 15px; display: flex; flex-direction: column; gap: 15px; }
+    .recent-item { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; color: inherit; padding-bottom: 12px; border-bottom: 1px solid #f1f5f9; }
+    .recent-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .recent-item img { width: 70px; height: 55px; object-fit: cover; border-radius: 4px; flex-shrink: 0; }
+    .recent-item-title { font-size: 13px; font-weight: 600; color: #1e293b; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .recent-item:hover .recent-item-title { color: #0d9488; }
+
+
+    .article-detail-card {
+      background: #ffffff;
+      border-radius: 6px;
+      padding: 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+    }
+    
+    .article-title { font-size: 28px; font-weight: bold; color: #1e293b; margin-bottom: 10px; line-height: 1.3; }
+    .article-meta { font-size: 13px; color: #94a3b8; margin-bottom: 25px; border-bottom: 1px solid #f1f5f9; padding-bottom: 15px; }
+    .article-body { font-size: 15px; color: #334155; line-height: 1.8; }
+    .article-body p { margin-bottom: 15px; }
+    .article-body img { width: 100%; border-radius: 6px; margin: 20px 0; max-height: 450px; object-fit: cover; }
+
+
+    .related-section { margin-top: 40px; }
+    .related-title { font-size: 20px; font-weight: bold; color: #f59e0b; margin-bottom: 20px; border-left: 4px solid #f59e0b; padding-left: 10px; }
+    .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .related-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+    .related-card img { width: 100%; height: 120px; object-fit: cover; }
+    .related-card-body { padding: 12px; }
+    .related-card-title { font-size: 13px; font-weight: bold; color: #1e293b; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 5px; }
+    .related-card-date { font-size: 11px; color: #94a3b8; }
+
+
+    .comment-section { margin-top: 40px; padding-top: 20px; border-top: 1px solid #e2e8f0; }
+    .comment-section > h3 { font-size: 20px; font-weight: bold; color: #1e293b; margin-bottom: 5px; }
+    .comment-note { font-size: 14px; color: #64748b; margin-bottom: 20px; }
+
+
+    .rating-overview-box {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 20px 25px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      margin-bottom: 25px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+    .rating-overview-score {
+      font-size: 42px;
+      font-weight: bold;
+      color: #0f172a;
+      line-height: 1;
+    }
+    .rating-overview-stars {
+      color: #f59e0b;
+      font-size: 18px;
+      margin-top: 6px;
+      letter-spacing: 2px;
+    }
+    .rating-overview-info h4 {
+      font-size: 16px;
+      font-weight: bold;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+    .rating-overview-info p {
+      font-size: 13px;
+      color: #64748b;
+    }
+
+
+    .comments-list-wrapper { display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; }
+    .comment-item { 
+      background: #ffffff; 
+      padding: 18px; 
+      border-radius: 8px; 
+      border: 1px solid #e2e8f0; 
+    }
+    .comment-item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 14px; }
+    .comment-author { font-weight: bold; color: #1e293b; display: flex; align-items: center; gap: 10px; }
+    .comment-stars { color: #f59e0b; font-size: 13px; }
+    .comment-date { color: #94a3b8; font-size: 12px; }
+    .comment-contact-info { font-size: 12px; color: #64748b; margin-bottom: 6px; }
+    .comment-text { font-size: 14px; color: #475569; margin-top: 4px; }
+
+
+    .comment-form-container {
+      background: #f8fafc;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+    .rating-select-group { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; font-size: 14px; font-weight: 600; color: #334155; }
+    .stars-selection { display: flex; gap: 5px; cursor: pointer; }
+    .star-item { font-size: 24px; color: #cbd5e1; transition: color 0.2s; }
+    .star-item.active { color: #f59e0b; }
+
+    .comment-form { display: flex; flex-direction: column; gap: 15px; }
+    .comment-form textarea { width: 100%; height: 110px; padding: 12px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 14px; }
+    .comment-form-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
+    .comment-form input { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 14px; }
+    .comment-checkbox { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #475569; }
+    .btn-comment-submit { background: #f59e0b; color: white; border: none; padding: 10px 20px; font-weight: bold; border-radius: 4px; cursor: pointer; width: fit-content; text-transform: uppercase; }
+    .btn-comment-submit:hover { background: #d97706; }
+
+    .error-box { text-align: center; padding: 40px; color: #ef4444; font-size: 16px; background: white; border-radius: 6px; }
+
+    @media(max-width: 900px) {
+      .main-layout { grid-template-columns: 1fr; }
+      .related-grid { grid-template-columns: 1fr; }
+      .comment-form-row { grid-template-columns: 1fr; }
+      .rating-overview-box { flex-direction: column; align-items: flex-start; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="top-bar-container">
+      <span>📍 ĐỊA CHỈ: TẦNG 1 - SỐ 152 XÃ ĐÀN - PHƯƠNG LIÊN - ĐỐNG ĐA - HÀ NỘI</span>
+      <span>📞 HOTLINE: 024.367.88888</span>
+    </div>
+  </div>
+
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo">MEDIVAX</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dich-vu.html">Giới thiệu</a></li>
+        <li><a href="tintuc.html" class="active">Tin tức</a></li>
+        <li><a href="dich-vu.html">Dịch vụ</a></li>
+        <li><a href="staff.html" target="_blank">Liên hệ</a></li>
+        <li><a href="staff.html" class="btn-appointment-nav">ĐĂNG HẸN KHÁM</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="main-layout">
+    
+    <div class="sidebar-left">
+      <div class="booking-box">
+        <div class="booking-header">ĐẶT LỊCH KHÁM</div>
+        <form class="booking-form" onsubmit="event.preventDefault(); alert('Gửi lịch khám thành công!');">
+          <input type="text" placeholder="Họ và tên" required>
+          <select required>
+            <option value="">Chọn bác sĩ</option>
+            <option value="1">BS. Nguyễn Anh Tuấn</option>
+            <option value="2">BS. Trần Thúy Vân</option>
+          </select>
+          <input type="email" placeholder="Email">
+          <select required>
+            <option value="">Chọn dịch vụ</option>
+            <option value="v1">Gói vắc-xin trẻ em</option>
+            <option value="v2">Khám tầm soát tổng quát</option>
+          </select>
+          <input type="text" placeholder="Số điện thoại" required>
+          <input type="date" required>
+          <select required>
+            <option value="">Chọn giờ</option>
+            <option value="s1">08:00 - 09:00</option>
+            <option value="s2">09:00 - 10:00</option>
+          </select>
+          <button type="submit" class="btn-booking-submit">ĐĂNG KÝ KHÁM</button>
+        </form>
+      </div>
+
+      <div class="recent-posts-box">
+        <div class="recent-posts-header">BÀI VIẾT MỚI</div>
+        <div id="recent-news-list" class="recent-list"></div>
+      </div>
+    </div>
+
+    <div>
+      <div id="article-detail-container">
+        <div class="error-box">Đang tải nội dung bài viết...</div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>GIỚI THIỆU PHÒNG KHÁM</h4>
+          <p>Phòng khám được đầu tư cơ sở vật chất khang trang, hiện đại đảm bảo hiệu quả điều trị luôn cao nhất, hoàn thành sứ mệnh chăm sóc sức khỏe cho người bệnh.</p>
+        </div>
+        <div class="footer-col">
+          <h4>DANH MỤC KHÁM</h4>
+          <ul>
+            <li>• Viêm nhiễm phụ khoa</li>
+            <li>• Bệnh cổ tử cung</li>
+            <li>• Bệnh buồng trứng</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>LIÊN HỆ</h4>
+          <p>Lịch làm việc: Thứ 2 – chủ nhật</p>
+          <p>Buổi sáng: 8h00 – 11h30</p>
+        </div>
+        <div class="footer-col">
+          <h4>BẢN ĐỒ GOOGLE MAP</h4>
+          <div class="map-wrapper">
+            <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.816939728027!2d105.73938337503179!3d21.04000948061218!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135096b31fa7abb%3A0xff645782804911af!2sVHLGsOG7nW5nIMSR4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgxJDDdG5nIMOB!5e0!3m2!1svi!2s!4v1784902859458!5m2!1svi!2s" 
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    const API_URL = 'api.php';
+    let currentRating = 5;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const articleId = urlParams.get('id');
+
+      if (!articleId) {
+        document.getElementById('article-detail-container').innerHTML = '<div class="error-box">Không tìm thấy mã bài viết.</div>';
+        return;
+      }
+
+      loadArticleDetail(articleId);
+    });
+
+    async function loadArticleDetail(id) {
+      try {
+        const [newsRes, reviewRes] = await Promise.all([
+          fetch(`${API_URL}?action=get_all_news`),
+          fetch(`${API_URL}?action=get_reviews&loai=tin_tuc&target_id=${id}`)
+        ]);
+
+        if (!newsRes.ok) throw new Error('Lỗi tải tin tức');
+        
+        const newsList = await newsRes.json();
+        let comments = [];
+        try {
+          if (reviewRes.ok) {
+            comments = await reviewRes.json();
+          }
+        } catch (e) {
+          comments = [];
+        }
+
+        const article = newsList.find(item => item.id == id);
+        const recentContainer = document.getElementById('recent-news-list');
+
+        if (Array.isArray(newsList) && newsList.length > 0) {
+          recentContainer.innerHTML = newsList.slice(0, 5).map(item => `
+            <a href="news-detail.html?id=${item.id}" class="recent-item">
+              <img src="${item.hinh_anh || 'IMAGE/anh1.jpg'}" alt="" onerror="this.src='IMAGE/anh1.jpg'">
+              <div class="recent-item-title">${escapeHtml(item.tieu_de)}</div>
+            </a>
+          `).join('');
+        }
+
+        if (!article) {
+          document.getElementById('article-detail-container').innerHTML = '<div class="error-box">Bài viết không tồn tại.</div>';
+          return;
+        }
+
+        let avgRating = "5.0";
+        let totalReviews = Array.isArray(comments) ? comments.length : 0;
+        
+        if (totalReviews > 0) {
+          const totalStars = comments.reduce((sum, item) => sum + parseFloat(item.so_sao || 5), 0);
+          avgRating = (totalStars / totalReviews).toFixed(1);
+        }
+
+        const relatedItems = newsList.filter(item => item.id != id).slice(0, 3);
+
+        document.getElementById('article-detail-container').innerHTML = `
+          <div class="article-detail-card">
+            <h1 class="article-title">${escapeHtml(article.tieu_de)}</h1>
+            <div class="article-meta">
+              <span>Đã đăng trên ${article.ngay_dang || '28 Tháng Năm, 2024'} bởi admin</span>
+            </div>
+            
+            <div class="article-body">
+              ${article.tom_tat ? `<p><strong>${escapeHtml(article.tom_tat)}</strong></p>` : ''}
+              ${article.hinh_anh ? `<img src="${article.hinh_anh}" alt="" onerror="this.style.display='none'">` : ''}
+              <div>${article.noi_dung || 'Nội dung chi tiết đang được cập nhật...'}</div>
+            </div>
+
+            <div class="related-section">
+              <div class="related-title">Bài viết liên quan</div>
+              <div class="related-grid">
+                ${relatedItems.length > 0 ? relatedItems.map(rel => `
+                  <a href="news-detail.html?id=${rel.id}" class="related-card">
+                    <img src="${rel.hinh_anh || 'IMAGE/anh1.jpg'}" alt="" onerror="this.src='IMAGE/anh1.jpg'">
+                    <div class="related-card-body">
+                      <div class="related-card-title">${escapeHtml(rel.tieu_de)}</div>
+                      <div class="related-card-date">${rel.ngay_dang || 'Th5 28, 2024'}</div>
+                    </div>
+                  </a>
+                `).join('') : '<p style="font-size:13px; color:#64748b;">Chưa có bài viết liên quan.</p>'}
+              </div>
+            </div>
+
+            <div class="comment-section">
+              <h3>Đánh giá & Bình luận dịch vụ</h3>
+              <div class="comment-note">Hãy chia sẻ trải nghiệm hoặc thắc mắc của bạn về dịch vụ này.</div>
+              
+              <div class="rating-overview-box">
+                <div class="rating-overview-score">
+                  ${totalReviews > 0 ? avgRating : '5.0'}
+                  <div class="rating-overview-stars">★★★★★</div>
+                </div>
+                <div class="rating-overview-info">
+                  <h4>Đánh giá trung bình từ khách hàng</h4>
+                  <p>Dựa trên ${totalReviews} đánh giá hợp lệ</p>
+                </div>
+              </div>
+
+              <div class="comments-list-wrapper" id="comments-list">
+                ${totalReviews > 0 ? comments.map(c => {
+                  const ratingVal = parseInt(c.so_sao || 5);
+                  return `
+                    <div class="comment-item">
+                      <div class="comment-item-header">
+                        <span class="comment-author">
+                          ${escapeHtml(c.ho_ten)} 
+                          <span class="comment-stars">${'★'.repeat(ratingVal)}${'☆'.repeat(5 - ratingVal)}</span>
+                        </span>
+                        <span class="comment-date">${c.ngay_tao || ''}</span>
+                      </div>
+                      ${c.sdt || c.email ? `
+                        <div class="comment-contact-info">
+                          ${c.sdt ? `📞 ${escapeHtml(c.sdt)}` : ''} ${c.sdt && c.email ? ' | ' : ''} ${c.email ? `✉️ ${escapeHtml(c.email)}` : ''}
+                        </div>
+                      ` : ''}
+                      <div class="comment-text">${escapeHtml(c.noi_dung)}</div>
+                    </div>
+                  `;
+                }).join('') : '<p style="font-size: 13px; color: #64748b; padding: 10px 0;">Chưa có đánh giá nào. Hãy là người đầu tiên đánh giá bài viết này!</p>'}
+              </div>
+
+              <div class="comment-form-container">
+                <div class="rating-select-group">
+                  <span>Chất lượng dịch vụ (Chọn sao) *</span>
+                  <div class="stars-selection" id="star-rating-box">
+                    <span class="star-item active" data-value="1">★</span>
+                    <span class="star-item active" data-value="2">★</span>
+                    <span class="star-item active" data-value="3">★</span>
+                    <span class="star-item active" data-value="4">★</span>
+                    <span class="star-item active" data-value="5">★</span>
+                  </div>
+                  <span id="rating-text" style="font-size: 13px; color: #d97706;">(5/5 sao)</span>
+                </div>
+
+                <form class="comment-form" id="form-comment">
+                  <textarea id="cmt-content" placeholder="Nội dung đánh giá *" required></textarea>
+                  <div class="comment-form-row">
+                    <input type="text" id="cmt-name" placeholder="Họ và tên *" required>
+                    <input type="tel" id="cmt-phone" placeholder="Số điện thoại *" required>
+                    <input type="email" id="cmt-email" placeholder="Email *" required>
+                  </div>
+                  <div class="comment-checkbox">
+                   
+                  </div>
+                  <button type="submit" class="btn-comment-submit">GỬI ĐÁNH GIÁ</button>
+                </form>
+              </div>
+
+            </div>
+
+          </div>
+        `;
+
+        setupStarRating();
+
+        document.getElementById('form-comment').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const name = document.getElementById('cmt-name').value;
+          const phone = document.getElementById('cmt-phone').value;
+          const email = document.getElementById('cmt-email').value;
+          const text = document.getElementById('cmt-content').value;
+
+          const formData = new URLSearchParams({
+            action: 'add_review',
+            loai: 'tin_tuc',
+            target_id: id,
+            ho_ten: name,
+            sdt: phone,
+            email: email,
+            so_sao: currentRating,
+            noi_dung: text
+          });
+
+          try {
+            const res = await fetch(API_URL, {
+              method: 'POST',
+              body: formData
+            });
+            const result = await res.json();
+
+            if (result.success) {
+              alert('Gửi đánh giá thành công!');
+              loadArticleDetail(id); 
+            } else {
+              alert('Lỗi: ' + (result.message || 'Không thể gửi bình luận.'));
+            }
+          } catch (err) {
+            console.error(err);
+            alert('Lỗi kết nối máy chủ!');
+          }
+        });
+
+      } catch (error) {
+        console.error("Lỗi:", error);
+        document.getElementById('article-detail-container').innerHTML = '<div class="error-box">Lỗi kết nối mạng hoặc máy chủ.</div>';
+      }
+    }
+
+    function setupStarRating() {
+      const stars = document.querySelectorAll('.star-item');
+      const ratingText = document.getElementById('rating-text');
+
+      stars.forEach(star => {
+        star.addEventListener('click', function() {
+          const val = parseInt(this.getAttribute('data-value'));
+          currentRating = val;
+          ratingText.innerText = `(${val}/5 sao)`;
+
+          stars.forEach(s => {
+            if (parseInt(s.getAttribute('data-value')) <= val) {
+              s.classList.add('active');
+            } else {
+              s.classList.remove('active');
+            }
+          });
+        });
+      });
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+  </script>
+</body>
+</html>

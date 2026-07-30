@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giỏ vắc-xin & Thanh toán giữ thuốc - Medivax</title>
+  <link rel="stylesheet" href="CSS/index.css?v=6">
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-info">
+        <span>📍 ĐỊA CHỈ: Tầng 1 - Số 152 Xã Đàn - Phường Phương Liên - Đống Đa - HN</span>
+        <span>⏰ MỞ CỬA: 8:00 - 20:00 (Kể cả T7 - CN)</span>
+      </div>
+      <div class="top-bar-contact">
+        <span>📞 HOTLINE: 024.367.88888 - 082.999.2020</span>
+      </div>
+    </div>
+  </div>
+
+  <header class="main-header">
+    <div class="container">
+      <div class="logo">
+        <h1>MEDIVAX</h1>
+        <span>PHÒNG KHÁM & TIÊM CHỦNG</span>
+      </div>
+      <nav class="nav-menu">
+        <ul>
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="gioithieu.html">Giới thiệu</a></li>
+          <li><a href="tintuc.html">Tin tức</a></li>
+          <li><a href="dich-vu.html">Dịch vụ</a></li>
+          <li><a href="lich-su-tiem.html">Lịch sử tiêm</a></li>
+          <li><a href="cart.html" class="cart-link active">🛒 Giỏ vắc-xin (<span id="cart-count">0</span>)</a></li>
+          <li><a href="lien-he.html">Liên hệ</a></li>
+        </ul>
+      </nav>
+      <div class="nav-auth">
+        <a href="login.html" id="btn-login-header" class="btn-primary">Đăng nhập</a>
+        <span id="header-user-name" style="font-weight:bold; display:none;"></span>
+        <button id="btn-logout-header" class="btn-logout" style="display:none; cursor:pointer;">Đăng xuất</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="cart-section" style="padding: 40px 0; background: #f8fafc; min-height: 60vh;">
+    <div class="container">
+      <div class="section-title" style="text-align: left; margin-bottom: 25px;">
+        <h2>Giỏ vắc-xin & Thanh toán giữ thuốc</h2>
+        <p>Kiểm tra lại danh sách các mũi tiêm và điền thông tin thanh toán để giữ thuốc tại kho lạnh GSP.</p>
+      </div>
+
+      <div class="cart-wrapper" style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px;">
+        <div class="cart-items-container" style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+          <table style="width: 100%; border-collapse: collapse;" id="cart-table">
+            <thead>
+              <tr style="border-bottom: 2px solid #e2e8f0; text-align: left;">
+                <th style="padding: 12px;">Tên Vắc-xin / Gói dịch vụ</th>
+                <th style="padding: 12px; text-align: center;">Số lượng</th>
+                <th style="padding: 12px; text-align: right;">Tạm tính</th>
+                <th style="padding: 12px; text-align: center;">Xóa</th>
+              </tr>
+            </thead>
+            <tbody id="cart-items-body">
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cart-checkout-box" style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); height: fit-content;">
+          <h3 style="margin-bottom: 15px; font-size: 18px; color: #1e293b;">Thông tin giữ thuốc</h3>
+          <form id="checkout-form">
+            <div style="margin-bottom: 15px;">
+              <label style="display: block; margin-bottom: 5px; font-size: 14px; color: #475569;">Họ và tên người đăng ký *</label>
+              <input type="text" id="checkout-name" class="form-control" placeholder="Nhập họ tên..." required style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+              <label style="display: block; margin-bottom: 5px; font-size: 14px; color: #475569;">Số điện thoại (Dùng nhận mã QR) *</label>
+              <input type="tel" id="checkout-phone" class="form-control" placeholder="Nhập số điện thoại..." required style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+              <label style="display: block; margin-bottom: 5px; font-size: 14px; color: #475569;">Email nhận xác nhận đơn hàng</label>
+              <input type="email" id="checkout-email" class="form-control" placeholder="Nhập địa chỉ email..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+              <label style="display: block; margin-bottom: 5px; font-size: 14px; color: #475569;">Địa chỉ nhận thông tin/tiêm chủng</label>
+              <input type="text" id="checkout-address" class="form-control" placeholder="Nhập địa chỉ của bạn..." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+              <label style="display: block; margin-bottom: 5px; font-size: 14px; color: #475569;">Phương thức thanh toán *</label>
+              <select id="checkout-payment-method" class="form-control" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                <option value="qr">Chuyển khoản quét mã QR ngân hàng</option>
+                <option value="cash">Thanh toán trực tiếp tại quầy</option>
+              </select>
+            </div>
+            <div style="border-top: 1px solid #e2e8f0; padding-top: 15px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-weight: 600; color: #334155;">Tổng tiền giữ thuốc:</span>
+              <span id="cart-total-price" style="font-size: 18px; font-weight: bold; color: #0284c7;">0 đ</span>
+            </div>
+            <button type="submit" class="btn-primary" style="width: 100%; padding: 12px; background: #0ea5e9; color: #fff; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">Xác nhận đặt giữ thuốc</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>VỀ MEDIVAX</h4>
+          <p>Hệ thống kho lạnh bảo quản vắc-xin đạt chuẩn GSP, đảm bảo chất lượng vắc-xin mua trước luôn an toàn tuyệt đối.</p>
+        </div>
+        <div class="footer-col">
+          <h4>DANH MỤC TIÊM CHỦNG</h4>
+          <ul>
+            <li>• Vắc xin trẻ em toàn diện</li>
+            <li>• Vắc xin tuổi vị thành niên</li>
+            <li>• Vắc xin phụ nữ chuẩn bị mang thai</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>LIÊN HỆ</h4>
+          <p>Lịch làm việc: Thứ 2 – Chủ nhật</p>
+          <p>Giờ mở cửa: 8h00 – 20h00</p>
+        </div>
+        <div class="footer-col">
+          <h4>BẢN ĐỒ</h4>
+          <div class="map-wrapper">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.321!2d105.836!3d21.011!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zWsOhIERjYW4sIMSQ4buRbmcgxJBhLCBIw6AgTuG7mWk!5e0!3m2!1svi!2s!4v1700000000000!5m2!1svi!2s" 
+              width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="bottom-notice">
+    Dữ liệu trên website demo là tham khảo, được thiết kế bởi Tran Viet Duc.
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      renderCart();
+      checkUserLoginStatus();
+
+      const checkoutForm = document.getElementById('checkout-form');
+      if (checkoutForm) {
+        checkoutForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          let cart = JSON.parse(localStorage.getItem('medivax_cart')) || [];
+          if (cart.length === 0) {
+            alert('Giỏ vắc-xin của bạn đang trống!');
+            return;
+          }
+
+          const name = document.getElementById('checkout-name').value.trim();
+          const phone = document.getElementById('checkout-phone').value.trim();
+          const email = document.getElementById('checkout-email').value.trim();
+          const address = document.getElementById('checkout-address').value.trim();
+          const paymentMethod = document.getElementById('checkout-payment-method').value;
+
+          if (!name || !phone) {
+            alert('Vui lòng nhập đầy đủ họ tên và số điện thoại!');
+            return;
+          }
+
+          let customerId = 0;
+          const loggedUserStr = localStorage.getItem('medivax_user') || sessionStorage.getItem('medivax_user');
+          if (loggedUserStr) {
+            try {
+              const uData = JSON.parse(loggedUserStr);
+              customerId = uData.id || 0;
+            } catch (err) {
+              console.error(err);
+            }
+          }
+
+          let orderDetails = cart.map(item => `${item.name} (SL: ${item.quantity})`).join(', ');
+
+          try {
+            const response = await fetch('api.php?action=add_appointment', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                customer_id: customerId,
+                fullName: name,
+                phone: phone,
+                email: email,
+                dia_chi: address,
+                booking_date: new Date().toISOString().split('T')[0],
+                booking_time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                trang_thai: 'Chờ xác nhận',
+                loai_giao_dich: 'Giữ thuốc',
+                chi_tiet_don_hang: orderDetails,
+                phuong_thuc_thanh_toan: paymentMethod
+              })
+            });
+            
+            const result = await response.json();
+            if (result.success) {
+              alert(`Đã đặt giữ thuốc thành công cho khách hàng ${name}!`);
+              localStorage.removeItem('medivax_cart');
+              renderCart();
+              checkoutForm.reset();
+            } else {
+              alert('Lỗi: ' + (result.message || 'Không thể lưu đơn giữ thuốc'));
+            }
+          } catch (error) {
+            console.error("Lỗi kết nối:", error);
+            alert('Lỗi kết nối đến máy chủ!');
+          }
+        });
+      }
+    });
+
+    function updateCartCount() {
+      let cart = JSON.parse(localStorage.getItem('medivax_cart')) || [];
+      let totalCount = cart.reduce((sum, item) => sum + parseInt(item.quantity || 1), 0);
+      
+      const countSpan = document.getElementById('cart-count');
+      if (countSpan) {
+        countSpan.textContent = totalCount;
+      }
+    }
+
+    function renderCart() {
+      updateCartCount();
+      let cart = JSON.parse(localStorage.getItem('medivax_cart')) || [];
+      const tbody = document.getElementById('cart-items-body');
+      const totalPriceEl = document.getElementById('cart-total-price');
+
+      if (!tbody) return;
+
+      if (cart.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 30px; color: #64748b;">Giỏ vắc-xin đang trống.</td></tr>`;
+        if (totalPriceEl) totalPriceEl.textContent = '0 đ';
+        return;
+      }
+
+      let grandTotal = 0;
+      tbody.innerHTML = cart.map((item, index) => {
+        let itemTotal = (parseFloat(item.price) || 0) * (parseInt(item.quantity) || 1);
+        grandTotal += itemTotal;
+        return `
+          <tr style="border-bottom: 1px solid #e2e8f0;">
+            <td style="padding: 12px; font-weight: 500; color: #1e293b;">${item.name}</td>
+            <td style="padding: 12px; text-align: center;">
+              <div style="display: inline-flex; align-items: center; border: 1px solid #cbd5e1; border-radius: 4px;">
+                <button type="button" onclick="changeQuantity(${index}, -1)" style="padding: 2px 8px; background: #f1f5f9; border: none; cursor: pointer;">-</button>
+                <span style="padding: 0 12px;">${item.quantity}</span>
+                <button type="button" onclick="changeQuantity(${index}, 1)" style="padding: 2px 8px; background: #f1f5f9; border: none; cursor: pointer;">+</button>
+              </div>
+            </td>
+            <td style="padding: 12px; text-align: right; color: #0284c7; font-weight: 600;">${itemTotal.toLocaleString('vi-VN')} đ</td>
+            <td style="padding: 12px; text-align: center;">
+              <button type="button" onclick="removeItem(${index})" style="background: #fee2e2; color: #ef4444; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;">Xóa</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      if (totalPriceEl) {
+        totalPriceEl.textContent = grandTotal.toLocaleString('vi-VN') + ' đ';
+      }
+    }
+
+    function changeQuantity(index, delta) {
+      let cart = JSON.parse(localStorage.getItem('medivax_cart')) || [];
+      if (cart[index]) {
+        cart[index].quantity += delta;
+        if (cart[index].quantity <= 0) {
+          cart.splice(index, 1);
+        }
+        localStorage.setItem('medivax_cart', JSON.stringify(cart));
+        renderCart();
+      }
+    }
+
+    function removeItem(index) {
+      let cart = JSON.parse(localStorage.getItem('medivax_cart')) || [];
+      cart.splice(index, 1);
+      localStorage.setItem('medivax_cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    function checkUserLoginStatus() {
+      const loggedUser = localStorage.getItem('medivax_user') || sessionStorage.getItem('medivax_user');
+      const btnLogin = document.getElementById('btn-login-header');
+      const userNameSpan = document.getElementById('header-user-name');
+      const btnLogout = document.getElementById('btn-logout-header');
+
+      if (loggedUser) {
+        try {
+          const userData = JSON.parse(loggedUser);
+          if (btnLogin) btnLogin.style.display = 'none';
+          if (userNameSpan) {
+            userNameSpan.textContent = `Xin chào, ${userData.fullName || userData.ho_ten || userData.name || 'Khách hàng'}`;
+            userNameSpan.style.display = 'inline-block';
+          }
+          if (btnLogout) {
+            btnLogout.style.display = 'inline-block';
+            btnLogout.onclick = () => {
+              localStorage.removeItem('medivax_user');
+              sessionStorage.removeItem('medivax_user');
+              location.reload();
+            };
+          }
+
+          const nameInput = document.getElementById('checkout-name');
+          const phoneInput = document.getElementById('checkout-phone');
+          const emailInput = document.getElementById('checkout-email');
+
+          if (nameInput && !nameInput.value) nameInput.value = userData.fullName || userData.ho_ten || userData.name || '';
+          if (phoneInput && !phoneInput.value) phoneInput.value = userData.phone || '';
+          if (emailInput && !emailInput.value) emailInput.value = userData.email || '';
+
+        } catch (e) {
+          console.error("Lỗi phân tích dữ liệu người dùng:", e);
+        }
+      }
+    }
+  </script>
+</body>
+</html>

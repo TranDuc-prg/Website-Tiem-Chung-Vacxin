@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Lịch Tiêm & Mua Trước - Viet-Vac</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo">💉 Viet-Vac System</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="danh-muc.html">Danh Mục Vắc-xin</a></li>
+                <li><a href="dat-lich.html" class="active">Đặt Mua Trực Tuyến</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="booking-section">
+            <h2 style="margin-bottom: 20px; color: var(--primary-color);">Đăng Ký Đặt Giữ / Mua Trước Vắc-xin</h2>
+            
+            <form id="bookingForm" onsubmit="handleFormSubmit(event)" novalidate>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="fullName">Họ và tên người tiêm/bé (*)</label>
+                        <input type="text" id="fullName" placeholder="Nguyễn Văn A">
+                        <span class="error-msg" id="errFullName">Vui lòng nhập họ tên đầy đủ (tối thiểu 3 ký tự)</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Số điện thoại liên hệ (*)</label>
+                        <input type="tel" id="phone" placeholder="0912345678">
+                        <span class="error-msg" id="errPhone">Số điện thoại không hợp lệ (10 chữ số, bắt đầu bằng 0)</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dob">Ngày sinh (*)</label>
+                        <input type="date" id="dob">
+                        <span class="error-msg" id="errDob">Ngày sinh không hợp lệ (không chọn ngày trong tương lai)</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vaccineSelect">Chọn vắc-xin giữ chỗ (*)</label>
+                        <select id="vaccineSelect" onchange="calculateTotal()"></select>
+                        <span class="error-msg" id="errVaccine">Vui lòng chọn 1 loại vắc-xin</span>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="branch">Chọn Chi Nhánh Tiêm</label>
+                        <select id="branch">
+                            <option value="hn1">Chi nhánh 1: Đống Đa, Hà Nội</option>
+                            <option value="hn2">Chi nhánh 2: Cầu Giấy, Hà Nội</option>
+                            <option value="hcm1">Chi nhánh 3: Quận 1, TP. HCM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="price-summary">
+                    <span>Tổng chi phí dự tính:</span>
+                    <span id="totalAmountDisplay" style="color: var(--danger-color);">0 VNĐ</span>
+                </div>
+
+                <button type="submit" class="btn" style="margin-top: 20px; font-size: 16px;">XÁC NHẬN ĐẶT MUA VẮC-XIN</button>
+            </form>
+        </section>
+    </main>
+
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <h2 style="color: var(--secondary-color); margin-bottom: 12px;">🎉 Đăng Ký Mua Trước Thành Công!</h2>
+            <p>Mã giữ suất của bạn đã được ghi nhận trên hệ thống.</p>
+            
+            <div class="timer-box">
+                Thời gian giữ suất mua ưu đãi còn lại: <span id="timerDisplay">05:00</span>
+            </div>
+
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">
+                Vui lòng đến trung tâm thanh toán và hoàn tất hồ sơ trong thời hạn trên.
+            </p>
+
+            <button class="btn" onclick="closeModal()">Đóng / Tạo Đơn Mới</button>
+        </div>
+    </div>
+
+    <audio id="successAudio">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" type="audio/mpeg">
+    </audio>
+
+    
+    <script src="js/main.js"></script>
+</body>
+</html>
