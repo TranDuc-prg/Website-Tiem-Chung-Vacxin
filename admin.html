@@ -7,10 +7,8 @@
   <link rel="stylesheet" href="CSS/index.css">
   <link rel="stylesheet" href="CSS/admin.css">
   <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
- 
 </head>
 <style>
-  
     :root {
       --primary: #0d9488;
       --primary-dark: #0f766e;
@@ -88,7 +86,6 @@
     .stat-card { background: white; padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
     .stat-card h5 { font-size: 13px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; }
     .stat-card .number { font-size: 24px; font-weight: 700; color: var(--primary); }
- 
 </style>
 <body>
 
@@ -108,6 +105,7 @@
       <li class="menu-item" data-tab="tab-support">📞 Quản lý Liên hệ</li>
       <div class="menu-divider"></div>
       <li class="menu-item" data-tab="tab-accounts">🔐 Quản lý Tài khoản</li>
+      <li class="menu-item" data-tab="tab-hr">🏢 Quản lý thành viên</li>
       <li class="menu-item" data-tab="tab-attendance">⏱️ Quản lý Chấm công</li>
       <li class="menu-item" data-tab="tab-inventory">📦 Quản lý Kho vắc-xin</li>
       <div class="menu-divider"></div>
@@ -131,7 +129,7 @@
     </header>
 
     <main class="content-area">
-     
+
       <section id="tab-dashboard" class="tab-pane active">
         <div class="stats-grid">
           <div class="stat-card">
@@ -151,7 +149,6 @@
             <div class="number" id="dash-total-contacts">-</div>
           </div>
         </div>
-
         
         <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 24px;">
           <div class="form-box" style="margin-bottom: 0;">
@@ -166,8 +163,8 @@
 
           <div class="form-box" style="margin-bottom: 0; display: flex; flex-direction: column; justify-content: space-between;">
             <div>
-             <h4 style="margin-bottom: 12px; font-size: 16px; color: var(--primary);">🛡️ Tổng quan Trung tâm Tiêm chủng & Mua trước Vắc-xin</h4>
-              <p style="color: var(--text-muted); font-size: 13.5px; line-height: 1.6;">Hệ thống quản lý trung tâm tiêm chủng Vacxin  hoạt động ổn định với cơ sở dữ liệu chuẩn SQL. Bạn có thể nhanh chóng nắm bắt các chỉ số quan trọng ngay tại tổng quan này.</p>
+              <h4 style="margin-bottom: 12px; font-size: 16px; color: var(--primary);">🛡️ Tổng quan Trung tâm Tiêm chủng & Mua trước Vắc-xin</h4>
+              <p style="color: var(--text-muted); font-size: 13.5px; line-height: 1.6;">Hệ thống quản lý trung tâm tiêm chủng Vacxin hoạt động ổn định với cơ sở dữ liệu chuẩn SQL.</p>
             </div>
             <div style="background: var(--primary-light); padding: 15px; border-radius: 8px; border: 1px solid #ccfbf1; margin-top: 15px;">
               <div style="font-size: 12px; font-weight: 700; color: var(--primary-dark); text-transform: uppercase; margin-bottom: 4px;">Trạng thái hệ thống</div>
@@ -176,7 +173,6 @@
           </div>
         </div>
 
-       
         <div class="form-box" style="margin-bottom: 0;">
           <h4 style="margin-bottom: 15px; font-size: 16px; color: var(--primary);">📅 Lịch hẹn tiêm chủng mới đăng ký gần đây</h4>
           <div class="custom-table-wrapper" style="box-shadow: none; border: none;">
@@ -192,7 +188,7 @@
         </div>
       </section>
 
-      
+
       <section id="tab-doctors" class="tab-pane">
         <div class="form-box">
           <h4 id="doctor-form-title" style="margin-bottom: 20px; color: var(--primary); font-size: 16px; font-weight: 700;">➕ Thêm Bác sĩ Mới</h4>
@@ -213,7 +209,7 @@
               <input type="text" id="doctor-image" class="form-control" placeholder="IMAGE/doctor.jpg...">
             </div>
             <div class="form-group">
-              <label>Mô tả chi tiết / Kinh nghiệm / Giới thiệu (Hỗ trợ chèn Ảnh & Video):</label>
+              <label>Mô tả chi tiết / Kinh nghiệm:</label>
               <div id="doctor-editor-container" style="height: 200px; background: #fff; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;"></div>
             </div>
             <div style="display: flex; gap: 10px; margin-top: 20px;">
@@ -233,7 +229,6 @@
         </div>
       </section>
 
-      
       <section id="tab-services" class="tab-pane">
         <div class="form-box">
           <h4 id="service-form-title" style="margin-bottom: 20px; color: var(--primary); font-size: 16px; font-weight: 700;">➕ Thêm Dịch vụ / Gói Vắc-xin Mới</h4>
@@ -284,7 +279,7 @@
         </div>
       </section>
 
-     
+
       <section id="tab-appointments" class="tab-pane">
         <div class="filter-box" style="justify-content: space-between; align-items: center;">
           <h4 style="font-size: 16px;">📅 Danh sách lịch hẹn tiêm chủng</h4>
@@ -302,7 +297,6 @@
         </div>
       </section>
 
-      
       <section id="tab-news" class="tab-pane">
         <div class="form-box">
           <h4 id="news-form-title" style="margin-bottom: 20px; color: var(--primary); font-size: 16px; font-weight: 700;">➕ Đăng Bài Viết / Tin Tức Mới</h4>
@@ -340,7 +334,7 @@
         </div>
       </section>
 
-      
+
       <section id="tab-customers" class="tab-pane">
         <div class="filter-box" style="justify-content: space-between; align-items: center; margin-bottom: 20px;">
           <div>
@@ -365,7 +359,7 @@
         </div>
       </section>
 
-     
+
       <section id="tab-reviews" class="tab-pane">
         <div class="form-box">
           <h4 id="review-form-title" style="margin-bottom: 20px; color: var(--primary); font-size: 16px; font-weight: 700;">➕ Thêm Đánh Giá Mới</h4>
@@ -443,7 +437,7 @@
         </div>
       </section>
 
-      
+
       <section id="tab-support" class="tab-pane">
         <div class="filter-box" style="justify-content: space-between; align-items: center; margin-bottom: 20px;">
           <div>
@@ -464,7 +458,7 @@
         </div>
       </section>
 
-     
+
       <section id="tab-accounts" class="tab-pane">
         <div class="filter-box" style="justify-content: space-between; align-items: center;">
           <div>
@@ -489,7 +483,41 @@
         </div>
       </section>
 
-     
+
+      <section id="tab-hr" class="tab-pane">
+        <div class="filter-box" style="justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <div>
+            <h4 style="margin-bottom: 4px; font-size: 16px;">🏢 Quản lý thành viên (Nhân viên & Quản lý)</h4>
+            <p style="font-size: 13px; color: var(--text-muted);">Danh sách các tài khoản phân quyền Staff và Manager trong hệ thống.</p>
+          </div>
+          <button class="btn btn-teal" onclick="openAccountModal()">➕ Thêm thành viên mới</button>
+        </div>
+        <div class="filter-box">
+          <input type="text" id="hrSearchInput" placeholder="Tìm kiếm theo họ tên, email, số điện thoại hoặc vai trò..." class="form-control" onkeyup="filterHRTable()">
+          <button class="btn btn-teal" onclick="filterHRTable()" style="padding: 0 24px;">Tìm kiếm</button>
+        </div>
+        <div class="custom-table-wrapper">
+          <table class="custom-table" id="hr-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Avatar</th>
+                <th>Họ và tên</th>
+                <th>Email</th>
+                <th>Số điện thoại</th>
+                <th>Vai trò (Role)</th>
+                <th>Trạng thái</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="8" style="text-align: center; color: #888;">Đang tải danh sách thành viên từ bảng users...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+
       <section id="tab-attendance" class="tab-pane">
         <div class="filter-box" style="justify-content: space-between; align-items: center;">
           <div>
@@ -510,75 +538,72 @@
         </div>
       </section>
 
-    
-<section id="tab-inventory" class="tab-pane">
-  <div class="filter-box" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-    <h4 style="font-size: 16px;">📦 Quản lý Kho vắc-xin & Chế phẩm sinh học</h4>
-    <div>
-      <input type="text" id="searchInventoryInput" placeholder="Tìm kiếm vắc-xin, mã lô..." onkeyup="searchInventory()" style="padding: 6px 12px; border-radius: 4px; border: 1px solid #ccc; width: 250px;">
-      <button class="btn btn-teal" onclick="openAddInventoryModal()" style="margin-left: 10px;">➕ Nhập lô vắc-xin mới</button>
-    </div>
-  </div>
-  
-  <div class="custom-table-wrapper">
-    <table class="custom-table">
-      <thead>
-        <tr>
-          <th>Mã lô</th>
-          <th>Tên vắc-xin</th>
-          <th>Hãng sản xuất</th>
-          <th>Số lượng tồn</th>
-          <th>Hạn sử dụng</th>
-          <th>Trạng thái kho</th>
-          <th>Thao tác</th>
-        </tr>
-      </thead>
-      <tbody id="inventory-table-body">
-        <tr><td colspan="7" style="text-align: center; color: #888;">Đang tải dữ liệu kho vắc-xin...</td></tr>
-      </tbody>
-    </table>
-  </div>
 
-  
-  <div class="modal fade" id="inventoryModal" tabindex="-1" aria-hidden="true" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999;">
-    <div class="modal-dialog" style="max-width: 500px; margin: 50px auto; background: #fff; border-radius: 8px; overflow: hidden;">
-      <div class="modal-content" style="padding: 20px;">
-        <h3 id="modalTitle" style="margin-bottom: 15px;">Thêm lô vắc-xin mới</h3>
-        <form id="inventoryForm">
-          <input type="hidden" id="inv-id" name="id">
-          
-          <div style="margin-bottom: 10px;">
-            <label>Mã lô:</label>
-            <input type="text" id="inv-malu" name="malu" class="form-control" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+      <section id="tab-inventory" class="tab-pane">
+        <div class="filter-box" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+          <h4 style="font-size: 16px;">📦 Quản lý Kho vắc-xin & Chế phẩm sinh học</h4>
+          <div>
+            <input type="text" id="searchInventoryInput" placeholder="Tìm kiếm vắc-xin, mã lô..." onkeyup="searchInventory()" style="padding: 6px 12px; border-radius: 4px; border: 1px solid #ccc; width: 250px;">
+            <button class="btn btn-teal" onclick="openAddInventoryModal()" style="margin-left: 10px;">➕ Nhập lô vắc-xin mới</button>
           </div>
-          <div style="margin-bottom: 10px;">
-            <label>Tên vắc-xin:</label>
-            <input type="text" id="inv-ten" name="ten_vaccine" class="form-control" required style="width: 100%; padding: 8px; box-sizing: border-box;">
-          </div>
-          <div style="margin-bottom: 10px;">
-            <label>Hãng sản xuất:</label>
-            <input type="text" id="inv-hang" name="hang_san_xuat" class="form-control" required style="width: 100%; padding: 8px; box-sizing: border-box;">
-          </div>
-          <div style="margin-bottom: 10px;">
-            <label>Số lượng tồn:</label>
-            <input type="number" id="inv-soluong" name="soluong_ton" class="form-control" required style="width: 100%; padding: 8px; box-sizing: border-box;">
-          </div>
-          <div style="margin-bottom: 15px;">
-            <label>Hạn sử dụng:</label>
-            <input type="date" id="inv-hansudung" name="han_su_dung" class="form-control" required style="width: 100%; padding: 8px; box-sizing: border-box;">
-          </div>
+        </div>
+        
+        <div class="custom-table-wrapper">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>Mã lô</th>
+                <th>Tên vắc-xin</th>
+                <th>Hãng sản xuất</th>
+                <th>Số lượng tồn</th>
+                <th>Hạn sử dụng</th>
+                <th>Trạng thái kho</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="inventory-table-body">
+              <tr><td colspan="7" style="text-align: center; color: #888;">Đang tải dữ liệu kho vắc-xin...</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-          <div style="text-align: right;">
-            <button type="button" class="btn btn-secondary" onclick="closeInventoryModal()">Hủy</button>
-            <button type="submit" class="btn btn-teal">Lưu thông tin</button>
+        <div class="modal fade" id="inventoryModal" tabindex="-1" aria-hidden="true" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999;">
+          <div class="modal-dialog" style="max-width: 500px; margin: 50px auto; background: #fff; border-radius: 8px; overflow: hidden;">
+            <div class="modal-content" style="padding: 20px;">
+              <h3 id="inventoryModalTitle" style="margin-bottom: 15px;">Thêm lô vắc-xin mới</h3>
+              <form id="inventoryForm">
+                <input type="hidden" id="inv-id" name="id">
+                <div style="margin-bottom: 10px;">
+                  <label>Mã lô:</label>
+                  <input type="text" id="inv-malu" name="malu" class="form-control" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+                </div>
+                <div style="margin-bottom: 10px;">
+                  <label>Tên vắc-xin:</label>
+                  <input type="text" id="inv-ten" name="ten_vaccine" class="form-control" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+                </div>
+                <div style="margin-bottom: 10px;">
+                  <label>Hãng sản xuất:</label>
+                  <input type="text" id="inv-hang" name="hang_san_xuat" class="form-control" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+                </div>
+                <div style="margin-bottom: 10px;">
+                  <label>Số lượng tồn:</label>
+                  <input type="number" id="inv-soluong" name="soluong_ton" class="form-control" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                  <label>Hạn sử dụng:</label>
+                  <input type="date" id="inv-hansudung" name="han_su_dung" class="form-control" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+                </div>
+                <div style="text-align: right;">
+                  <button type="button" class="btn btn-secondary" onclick="closeInventoryModal()">Hủy</button>
+                  <button type="submit" class="btn btn-teal">Lưu thông tin</button>
+                </div>
+              </form>
+            </div>
           </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
+        </div>
+      </section>
 
-    
+
       <section id="tab-reports" class="tab-pane">
         <div class="filter-box" style="justify-content: space-between; align-items: center; margin-bottom: 20px;">
           <div>
@@ -588,7 +613,6 @@
           <button class="btn btn-secondary" onclick="loadReportStats()" style="background: #f1f5f9; color: #334155; border: 1px solid var(--border-color);">🔄 Làm mới số liệu</button>
         </div>
 
-        
         <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 24px;">
           <div class="stat-card">
             <h5>Tổng doanh thu hệ thống</h5>
@@ -608,17 +632,13 @@
           </div>
         </div>
 
-        
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
-         
           <div class="form-box" style="margin-bottom: 0;">
             <h4 style="margin-bottom: 15px; color: var(--primary); font-size: 16px;">📊 Biểu đồ Cột - Trạng thái lịch hẹn</h4>
             <div style="position: relative; height: 260px;">
               <canvas id="appointmentChart"></canvas>
             </div>
           </div>
-
-          
           <div class="form-box" style="margin-bottom: 0;">
             <h4 style="margin-bottom: 15px; color: var(--primary); font-size: 16px;">🍩 Biểu đồ Tròn - Tỷ trọng trạng thái</h4>
             <div style="position: relative; height: 260px;">
@@ -630,7 +650,7 @@
     </main>
   </div>
 
-  
+
   <div id="customerModal" class="modal-overlay">
     <div class="modal-content">
       <div class="modal-header">
@@ -641,7 +661,6 @@
     </div>
   </div>
 
-  
   <div id="accountModal" class="modal-overlay">
     <div class="modal-content" style="width: 550px;">
       <div class="modal-header">
@@ -649,46 +668,50 @@
         <button class="modal-close" onclick="closeAccountModal()">&times;</button>
       </div>
       <form id="account-form" onsubmit="saveAccount(event)">
-        <input type="hidden" id="account-id">
-        <div class="form-group">
-          <label>Họ và tên (fullName):</label>
-          <input type="text" id="account-fullname" class="form-control" required placeholder="Nhập họ tên...">
-        </div>
-        <div class="form-group">
-          <label>Email đăng nhập:</label>
-          <input type="email" id="account-email" class="form-control" required placeholder="Nhập email...">
-        </div>
-        <div class="form-group">
-          <label>Mật khẩu (password):</label>
-          <input type="text" id="account-password" class="form-control" placeholder="Nhập mật khẩu (để trống nếu không đổi)...">
-        </div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-          <div class="form-group">
-            <label>Số điện thoại (phone):</label>
-            <input type="text" id="account-phone" class="form-control" placeholder="Nhập số điện thoại...">
-          </div>
-          <div class="form-group">
-            <label>Vai trò (role):</label>
-            <select id="account-role" class="form-control" required>
-              <option value="manager">manager (Quản trị)</option>
-              <option value="staff">staff (Nhân viên)</option>
-              <option value="customer">customer (Khách hàng)</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Trạng thái tài khoản (status):</label>
-          <select id="account-status" class="form-control" required>
-            <option value="active">active (Hoạt động)</option>
-            <option value="locked">locked (Khóa)</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-teal" style="width: 100%; margin-top: 10px;">Lưu thông tin tài khoản</button>
-      </form>
+  <input type="hidden" id="account-id">
+  <div class="form-group">
+    <label>Họ và tên (fullName):</label>
+    <input type="text" id="account-fullname" class="form-control" required placeholder="Nhập họ tên...">
+  </div>
+  <div class="form-group">
+    <label>Email đăng nhập:</label>
+    <input type="email" id="account-email" class="form-control" required placeholder="Nhập email...">
+  </div>
+  <div class="form-group">
+    <label>Mật khẩu (password):</label>
+    <input type="text" id="account-password" class="form-control" placeholder="Nhập mật khẩu (để trống nếu không đổi)...">
+  </div>
+
+  <div class="form-group">
+    <label>Đường dẫn Avatar (URL):</label>
+    <input type="text" id="account-avatar" class="form-control" placeholder="IMAGE/avatar.jpg hoặc https://...">
+  </div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+    <div class="form-group">
+      <label>Số điện thoại (phone):</label>
+      <input type="text" id="account-phone" class="form-control" placeholder="Nhập số điện thoại...">
+    </div>
+    <div class="form-group">
+      <label>Vai trò (role):</label>
+      <select id="account-role" class="form-control" required>
+        <option value="manager">manager (Quản trị)</option>
+        <option value="staff">staff (Nhân viên)</option>
+        <option value="customer">customer (Khách hàng)</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Trạng thái tài khoản (status):</label>
+    <select id="account-status" class="form-control" required>
+      <option value="active">active (Hoạt động)</option>
+      <option value="locked">locked (Khóa)</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-teal" style="width: 100%; margin-top: 10px;">Lưu thông tin tài khoản</button>
+</form>
     </div>
   </div>
 
- 
   <div id="attendanceModal" class="modal-overlay">
     <div class="modal-content" style="width: 550px;">
       <div class="modal-header">
@@ -731,7 +754,7 @@
     </div>
   </div>
 
-  
+
   <script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
@@ -770,6 +793,7 @@
       initNewsForm();
       initDoctorForm();
       initReviewForm();
+      initHRForm();
       loadInventory(); 
     });
 
@@ -791,281 +815,253 @@
         else if (target === 'tab-reviews') { loadReviewDropdownData(); loadReviews(); }
         else if (target === 'tab-support') loadSupportContacts();
         else if (target === 'tab-accounts') loadAccountsList();
+        else if (target === 'tab-hr') loadHRList();
         else if (target === 'tab-attendance') loadAttendanceList();
         else if (target === 'tab-inventory') loadInventory();
       });
     });
 
+    function generateBatchCode() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const randomNum = Math.floor(1000 + Math.random() * 9000); 
+      return `LO-${year}${month}${day}-${randomNum}`;
+    }
 
-function generateBatchCode() {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const day = String(now.getDate()).padStart(2, '0');
-  const randomNum = Math.floor(1000 + Math.random() * 9000); 
-  return `LO-${year}${month}${day}-${randomNum}`;
-}
+    async function loadInventory() {
+      try {
+        const res = await fetch(`${API_URL}?action=get_inventory`);
+        if (res.ok) {
+          const data = await res.json();
+          let html = '';
+          if (!Array.isArray(data) || data.length === 0) {
+            html = '<tr><td colspan="7" style="text-align: center; color: #888;">Chưa có dữ liệu kho vắc-xin.</td></tr>';
+          } else {
+            data.forEach(item => {
+              html += `
+                <tr>
+                    <td>${escapeHtml(item.ma_lo)}</td>
+                    <td><strong>${escapeHtml(item.ten_vacxin)}</strong></td>
+                    <td>${escapeHtml(item.hang_san_xuat)}</td>
+                    <td>${escapeHtml(item.so_luong_ton)}</td>
+                    <td>${escapeHtml(item.han_su_dung)}</td>
+                    <td><span class="badge badge-arrived">${escapeHtml(item.trang_thai_kho || 'Ổn định')}</span></td>
+                    <td>
+                      <div class="actions">
+                        <button class="btn btn-warning" style="padding: 4px 8px; font-size: 11px;" onclick='editInventory(${JSON.stringify(item)})'>Sửa</button>
+                        <button class="btn btn-danger" style="padding: 4px 8px; font-size: 11px;" onclick="deleteInventory(${item.id})">Xóa</button>
+                      </div>
+                    </td>
+                </tr>
+              `;
+            });
+          }
+          const tbody = document.getElementById('inventory-table-body');
+          if (tbody) tbody.innerHTML = html;
+        }
+      } catch (error) { 
+        console.error('Lỗi tải kho vắc-xin:', error); 
+      }
+    }
 
-async function loadInventory() {
-  try {
-    const res = await fetch(`${API_URL}?action=get_inventory`);
-    if (res.ok) {
-      const data = await res.json();
+    function openAddInventoryModal() {
+      const form = document.getElementById('inventoryForm');
+      if (form) form.reset();
+      const idInput = document.getElementById('inv-id');
+      if (idInput) idInput.value = '';
+      const maLoInput = document.getElementById('inv-malu');
+      if (maLoInput) maLoInput.value = generateBatchCode();
+      const title = document.getElementById('inventoryModalTitle');
+      if (title) title.innerText = "➕ Nhập lô vắc-xin mới";
+      const modal = document.getElementById('inventoryModal');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function editInventory(item) {
+      const title = document.getElementById('inventoryModalTitle');
+      if (title) title.innerText = "✏️ Cập nhật thông tin lô vắc-xin";
+      document.getElementById('inv-id').value = item.id;
+      document.getElementById('inv-malu').value = item.ma_lo || '';
+      document.getElementById('inv-ten').value = item.ten_vacxin || '';
+      document.getElementById('inv-hang').value = item.hang_san_xuat || '';
+      document.getElementById('inv-soluong').value = item.so_luong_ton || '';
+      document.getElementById('inv-hansudung').value = item.han_su_dung || '';
+      const modal = document.getElementById('inventoryModal');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function closeInventoryModal() {
+      const modal = document.getElementById('inventoryModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const invForm = document.getElementById('inventoryForm');
+      if (invForm) {
+        invForm.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          const id = document.getElementById('inv-id').value;
+          const actionType = id ? 'update_inventory' : 'add_inventory';
+
+          const payload = {
+            id: id ? parseInt(id) : undefined,
+            ma_lo: document.getElementById('inv-malu').value.trim(),
+            ten_vacxin: document.getElementById('inv-ten').value.trim(),
+            hang_san_xuat: document.getElementById('inv-hang').value.trim(),
+            so_luong_ton: document.getElementById('inv-soluong').value.trim(),
+            han_su_dung: document.getElementById('inv-hansudung').value.trim()
+          };
+
+          try {
+            const res = await fetch(`${API_URL}?action=${actionType}`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+            const result = await res.json();
+            if (result.success) {
+              alert(id ? "Cập nhật lô vắc-xin thành công!" : "Thêm lô vắc-xin thành công!");
+              closeInventoryModal();
+              loadInventory();
+            } else {
+              alert("Lỗi: " + (result.message || "Không thể lưu dữ liệu"));
+            }
+          } catch (err) {
+            alert("Lỗi kết nối máy chủ!");
+          }
+        });
+      }
+    });
+
+    async function deleteInventory(id) {
+      if (confirm("Bạn có chắc chắn muốn xóa lô vắc-xin này khỏi kho không?")) {
+        try {
+          const res = await fetch(`${API_URL}?action=delete_inventory&id=${id}`);
+          const result = await res.json();
+          if (result.success) {
+            loadInventory();
+          } else {
+            alert("Lỗi: " + (result.message || "Không thể xóa"));
+          }
+        } catch (err) {
+          alert("Lỗi kết nối máy chủ!");
+        }
+      }
+    }
+
+    function searchInventory() {
+      let input = document.getElementById('searchInventoryInput').value.toLowerCase();
+      let rows = document.getElementById('inventory-table-body').getElementsByTagName('tr');
+      for (let i = 0; i < rows.length; i++) {
+        rows[i].style.display = rows[i].textContent.toLowerCase().includes(input) ? "" : "none";
+      }
+    }
+
+    let dashChartInstance = null;
+
+    async function loadDashboardStats() {
+      try {
+        const [resCus, resApp, resServ, resCont] = await Promise.all([
+          fetch(`${API_URL}?action=get_all_customers`),
+          fetch(`${API_URL}?action=get_appointments`),
+          fetch(`${API_URL}?action=get_all_services`),
+          fetch(`${API_URL}?action=get_contacts`)
+        ]);
+
+        let appointmentsList = [];
+        if (resCus.ok) {
+          const list = await resCus.json();
+          document.getElementById('dash-total-customers').innerText = Array.isArray(list) ? list.length : 0;
+        }
+        if (resApp.ok) {
+          appointmentsList = await resApp.json();
+          document.getElementById('dash-total-appointments').innerText = Array.isArray(appointmentsList) ? appointmentsList.length : 0;
+          renderRecentAppointments(appointmentsList.slice(0, 5));
+          renderDashChart(appointmentsList);
+        }
+        if (resServ.ok) {
+          const list = await resServ.json();
+          document.getElementById('dash-total-services').innerText = Array.isArray(list) ? list.length : 0;
+        }
+        if (resCont.ok) {
+          const list = await resCont.json();
+          document.getElementById('dash-total-contacts').innerText = Array.isArray(list) ? list.length : 0;
+        }
+      } catch (e) { 
+        console.error('Lỗi tải dữ liệu dashboard:', e); 
+      }
+    }
+
+    function renderRecentAppointments(list) {
       let html = '';
-      if (!Array.isArray(data) || data.length === 0) {
-        html = '<tr><td colspan="7" style="text-align: center; color: #888;">Chưa có dữ liệu kho vắc-xin.</td></tr>';
+      if (!Array.isArray(list) || list.length === 0) {
+        html = '<tr><td colspan="6" style="text-align: center; color: #888;">Không có lịch hẹn nào.</td></tr>';
       } else {
-        data.forEach(item => {
+        list.forEach(item => {
+          let badgeClass = 'badge-pending';
+          let statusText = item.trang_thai || 'Chờ xác nhận';
+          if (statusText.toLowerCase().includes('hoàn thành') || statusText.toLowerCase().includes('đã tiêm')) badgeClass = 'badge-arrived';
+          else if (statusText.toLowerCase().includes('hủy')) badgeClass = 'badge-cancelled';
+
           html += `
             <tr>
-                <td>${escapeHtml(item.ma_lo)}</td>
-                <td><strong>${escapeHtml(item.ten_vacxin)}</strong></td>
-                <td>${escapeHtml(item.hang_san_xuat)}</td>
-                <td>${escapeHtml(item.so_luong_ton)}</td>
-                <td>${escapeHtml(item.han_su_dung)}</td>
-                <td><span class="badge badge-arrived">${escapeHtml(item.trang_thai_kho || 'Ổn định')}</span></td>
-                <td>
-                  <div class="actions">
-                    <button class="btn btn-warning" style="padding: 4px 8px; font-size: 11px;" onclick='editInventory(${JSON.stringify(item)})'>Sửa</button>
-                    <button class="btn btn-danger" style="padding: 4px 8px; font-size: 11px;" onclick="deleteInventory(${item.id})">Xóa</button>
-                  </div>
-                </td>
+              <td>#${item.id}</td>
+              <td><strong>${escapeHtml(item.ho_ten || item.customer_name)}</strong></td>
+              <td>${escapeHtml(item.so_dien_thoai || item.phone)}</td>
+              <td>${escapeHtml(item.ten_dich_vu || item.service_name || 'Tiêm chủng dịch vụ')}</td>
+              <td>${escapeHtml(item.ngay_hen || item.appointment_date)}</td>
+              <td><span class="badge ${badgeClass}">${escapeHtml(statusText)}</span></td>
             </tr>
           `;
         });
       }
-      const tbody = document.getElementById('inventory-table-body');
+      const tbody = document.getElementById('dash-recent-appointments-table');
       if (tbody) tbody.innerHTML = html;
     }
-  } catch (error) { 
-    console.error('Lỗi tải kho vắc-xin:', error); 
-  }
-}
 
+    function renderDashChart(appointments) {
+      let pendingCount = 0;     
+      let arrivedCount = 0;     
+      let cancelledCount = 0;  
 
-function openAddInventoryModal() {
-  const form = document.getElementById('inventoryForm');
-  if (form) form.reset();
-  
-  const idInput = document.getElementById('inv-id');
-  if (idInput) idInput.value = '';
-  
-  
-  const maLoInput = document.getElementById('inv-malu');
-  if (maLoInput) {
-    maLoInput.value = generateBatchCode();
-  }
-  
-  const title = document.getElementById('inventoryModalTitle');
-  if (title) title.innerText = "➕ Nhập lô vắc-xin mới";
-  
-  const modal = document.getElementById('inventoryModal');
-  if (modal) modal.style.display = 'flex';
-}
-
-
-function editInventory(item) {
-  const title = document.getElementById('inventoryModalTitle');
-  if (title) title.innerText = "✏️ Cập nhật thông tin lô vắc-xin";
-  
-  document.getElementById('inv-id').value = item.id;
-  document.getElementById('inv-malu').value = item.ma_lo || '';
-  document.getElementById('inv-ten').value = item.ten_vacxin || '';
-  document.getElementById('inv-hang').value = item.hang_san_xuat || '';
-  document.getElementById('inv-soluong').value = item.so_luong_ton || '';
-  document.getElementById('inv-hansudung').value = item.han_su_dung || '';
-  
-  const modal = document.getElementById('inventoryModal');
-  if (modal) modal.style.display = 'flex';
-}
-
-
-function closeInventoryModal() {
-  const modal = document.getElementById('inventoryModal');
-  if (modal) modal.style.display = 'none';
-}
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  const invForm = document.getElementById('inventoryForm');
-  if (invForm) {
-    invForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const id = document.getElementById('inv-id').value;
-      const actionType = id ? 'update_inventory' : 'add_inventory';
-
-      const payload = {
-        id: id ? parseInt(id) : undefined,
-        ma_lo: document.getElementById('inv-malu').value.trim(),
-        ten_vacxin: document.getElementById('inv-ten').value.trim(),
-        hang_san_xuat: document.getElementById('inv-hang').value.trim(),
-        so_luong_ton: document.getElementById('inv-soluong').value.trim(),
-        han_su_dung: document.getElementById('inv-hansudung').value.trim()
-      };
-
-      try {
-        const res = await fetch(`${API_URL}?action=${actionType}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        const result = await res.json();
-        if (result.success) {
-          alert(id ? "Cập nhật lô vắc-xin thành công!" : "Thêm lô vắc-xin thành công!");
-          closeInventoryModal();
-          loadInventory();
+      appointments.forEach(item => {
+        let st = (item.trang_thai || '').trim().toUpperCase();
+        if (st.includes('ĐÃ ĐẾN') || st.includes('HOÀN THÀNH') || st.includes('ĐÃ TIÊM')) {
+          arrivedCount++;
+        } else if (st.includes('HỦY')) {
+          cancelledCount++;
         } else {
-          alert("Lỗi: " + (result.message || "Không thể lưu dữ liệu"));
+          pendingCount++; 
         }
-      } catch (err) {
-        alert("Lỗi kết nối máy chủ!");
-      }
-    });
-  }
-});
+      });
 
-async function deleteInventory(id) {
-  if (confirm("Bạn có chắc chắn muốn xóa lô vắc-xin này khỏi kho không?")) {
-    try {
-      const res = await fetch(`${API_URL}?action=delete_inventory&id=${id}`);
-      const result = await res.json();
-      if (result.success) {
-        loadInventory();
-      } else {
-        alert("Lỗi: " + (result.message || "Không thể xóa"));
-      }
-    } catch (err) {
-      alert("Lỗi kết nối máy chủ!");
-    }
-  }
-}
+      const ctx = document.getElementById('dashRevenueChart');
+      if (!ctx) return;
 
-function searchInventory() {
-  let input = document.getElementById('searchInventoryInput').value.toLowerCase();
-  let rows = document.getElementById('inventory-table-body').getElementsByTagName('tr');
-  for (let i = 0; i < rows.length; i++) {
-    rows[i].style.display = rows[i].textContent.toLowerCase().includes(input) ? "" : "none";
-  }
-}
+      if (dashChartInstance) dashChartInstance.destroy();
 
-let dashChartInstance = null;
-
-async function loadDashboardStats() {
-  try {
-    const [resCus, resApp, resServ, resCont] = await Promise.all([
-      fetch(`${API_URL}?action=get_all_customers`),
-      fetch(`${API_URL}?action=get_appointments`),
-      fetch(`${API_URL}?action=get_all_services`),
-      fetch(`${API_URL}?action=get_contacts`)
-    ]);
-
-    let appointmentsList = [];
-    if (resCus.ok) {
-      const list = await resCus.json();
-      document.getElementById('dash-total-customers').innerText = Array.isArray(list) ? list.length : 0;
-    }
-    if (resApp.ok) {
-      appointmentsList = await resApp.json();
-      document.getElementById('dash-total-appointments').innerText = Array.isArray(appointmentsList) ? appointmentsList.length : 0;
-      
-      
-      renderRecentAppointments(appointmentsList.slice(0, 5));
-      
-      
-      renderDashChart(appointmentsList);
-    }
-    if (resServ.ok) {
-      const list = await resServ.json();
-      document.getElementById('dash-total-services').innerText = Array.isArray(list) ? list.length : 0;
-    }
-    if (resCont.ok) {
-      const list = await resCont.json();
-      document.getElementById('dash-total-contacts').innerText = Array.isArray(list) ? list.length : 0;
-    }
-  } catch (e) { 
-    console.error('Lỗi tải dữ liệu dashboard:', e); 
-  }
-}
-
-function renderRecentAppointments(list) {
-  let html = '';
-  if (!Array.isArray(list) || list.length === 0) {
-    html = '<tr><td colspan="6" style="text-align: center; color: #888;">Không có lịch hẹn nào.</td></tr>';
-  } else {
-    list.forEach(item => {
-      let badgeClass = 'badge-pending';
-      let statusText = item.trang_thai || 'Chờ xác nhận';
-      if (statusText.toLowerCase().includes('hoàn thành') || statusText.toLowerCase().includes('đã tiêm')) badgeClass = 'badge-arrived';
-      else if (statusText.toLowerCase().includes('hủy')) badgeClass = 'badge-cancelled';
-
-      html += `
-        <tr>
-          <td>#${item.id}</td>
-          <td><strong>${escapeHtml(item.ho_ten || item.customer_name)}</strong></td>
-          <td>${escapeHtml(item.so_dien_thoai || item.phone)}</td>
-          <td>${escapeHtml(item.ten_dich_vu || item.service_name || 'Tiêm chủng dịch vụ')}</td>
-          <td>${escapeHtml(item.ngay_hen || item.appointment_date)}</td>
-          <td><span class="badge ${badgeClass}">${escapeHtml(statusText)}</span></td>
-        </tr>
-      `;
-    });
-  }
-  const tbody = document.getElementById('dash-recent-appointments-table');
-  if (tbody) tbody.innerHTML = html;
-}
-
-function renderDashChart(appointments) {
-  
-  let pendingCount = 0;     
-  let arrivedCount = 0;     
-  let cancelledCount = 0;  
-
-  appointments.forEach(item => {
-    let st = (item.trang_thai || '').trim().toUpperCase();
-    
-    if (st.includes('ĐÃ ĐẾN') || st.includes('HOÀN THÀNH') || st.includes('ĐÃ TIÊM')) {
-      arrivedCount++;
-    } else if (st.includes('HỦY')) {
-      cancelledCount++;
-    } else {
-      pendingCount++; 
-    }
-  });
-
-  const ctx = document.getElementById('dashRevenueChart');
-  if (!ctx) return;
-
-  if (dashChartInstance) {
-    dashChartInstance.destroy();
-  }
-
-  dashChartInstance = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Chờ xác nhận', 'Đã đến', 'Đã hủy'],
-      datasets: [{
-        label: 'Số lượng lịch hẹn',
-        data: [pendingCount, arrivedCount, cancelledCount],
-        backgroundColor: ['#f59e0b', '#10b981', '#ef4444'],
-        borderRadius: 6
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false }
-      },
-      scales: {
-        y: { 
-          beginAtZero: true,
-          ticks: { stepSize: 1 }
+      dashChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Chờ xác nhận', 'Đã đến', 'Đã hủy'],
+          datasets: [{
+            label: 'Số lượng lịch hẹn',
+            data: [pendingCount, arrivedCount, cancelledCount],
+            backgroundColor: ['#f59e0b', '#10b981', '#ef4444'],
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
         }
-      }
+      });
     }
-  });
-}
-    
+
     async function loadStaffServices() {
       try {
         const res = await fetch(`${API_URL}?action=get_all_services`);
@@ -1304,17 +1300,11 @@ function renderDashChart(appointments) {
           body: JSON.stringify({ id: id, trang_thai: newStatus })
         });
         const result = await res.json();
-        if (result.success) {
-          loadAppointments();
-        } else {
-          alert("Lỗi: " + (result.message || "Không thể cập nhật trạng thái"));
-        }
-      } catch (err) {
-        alert("Lỗi kết nối máy chủ!");
-      }
+        if (result.success) loadAppointments();
+        else alert("Lỗi: " + (result.message || "Không thể cập nhật trạng thái"));
+      } catch (err) { alert("Lỗi kết nối máy chủ!"); }
     }
 
-    
     async function loadStaffNews() {
       try {
         const res = await fetch(`${API_URL}?action=get_all_news`);
@@ -1401,7 +1391,6 @@ function renderDashChart(appointments) {
       }
     }
 
-    
     async function loadCustomers() {
       try {
         const res = await fetch(`${API_URL}?action=get_all_customers`);
@@ -1555,7 +1544,6 @@ function renderDashChart(appointments) {
       document.getElementById('customerModal').style.display = 'none';
     }
 
-   
     let cachedDoctors = [];
     let cachedServices = [];
     let cachedNews = [];
@@ -1587,43 +1575,31 @@ function renderDashChart(appointments) {
 
       if (typeVal === 'Bác sĩ') {
         targetLabel.innerText = 'Chọn Bác sĩ:';
-        if (cachedDoctors.length === 0) {
-          targetSelect.innerHTML = '<option value="">Không có bác sĩ nào</option>';
-        } else {
-          cachedDoctors.forEach(d => {
-            const opt = document.createElement('option');
-            opt.value = d.id;
-            opt.textContent = `${d.name} (${d.specialty || 'Bác sĩ'})`;
-            if (selectedValue && String(selectedValue) === String(d.id)) opt.selected = true;
-            targetSelect.appendChild(opt);
-          });
-        }
+        cachedDoctors.forEach(d => {
+          const opt = document.createElement('option');
+          opt.value = d.id;
+          opt.textContent = `${d.name} (${d.specialty || 'Bác sĩ'})`;
+          if (selectedValue && String(selectedValue) === String(d.id)) opt.selected = true;
+          targetSelect.appendChild(opt);
+        });
       } else if (typeVal === 'Dịch vụ') {
         targetLabel.innerText = 'Chọn Dịch vụ / Vắc-xin:';
-        if (cachedServices.length === 0) {
-          targetSelect.innerHTML = '<option value="">Không có dịch vụ nào</option>';
-        } else {
-          cachedServices.forEach(s => {
-            const opt = document.createElement('option');
-            opt.value = s.id;
-            opt.textContent = `${s.ten_dich_vu} - ${Number(s.gia || 0).toLocaleString()}đ`;
-            if (selectedValue && String(selectedValue) === String(s.id)) opt.selected = true;
-            targetSelect.appendChild(opt);
-          });
-        }
+        cachedServices.forEach(s => {
+          const opt = document.createElement('option');
+          opt.value = s.id;
+          opt.textContent = `${s.ten_dich_vu} - ${Number(s.gia || 0).toLocaleString()}đ`;
+          if (selectedValue && String(selectedValue) === String(s.id)) opt.selected = true;
+          targetSelect.appendChild(opt);
+        });
       } else {
         targetLabel.innerText = 'Chọn Tin tức / Bài viết:';
-        if (cachedNews.length === 0) {
-          targetSelect.innerHTML = '<option value="">Không có bài viết nào</option>';
-        } else {
-          cachedNews.forEach(n => {
-            const opt = document.createElement('option');
-            opt.value = n.id;
-            opt.textContent = n.tieu_de;
-            if (selectedValue && String(selectedValue) === String(n.id)) opt.selected = true;
-            targetSelect.appendChild(opt);
-          });
-        }
+        cachedNews.forEach(n => {
+          const opt = document.createElement('option');
+          opt.value = n.id;
+          opt.textContent = n.tieu_de;
+          if (selectedValue && String(selectedValue) === String(n.id)) opt.selected = true;
+          targetSelect.appendChild(opt);
+        });
       }
     }
 
@@ -1677,7 +1653,6 @@ function renderDashChart(appointments) {
       const tbody = document.querySelector('#reviews-table tbody');
       if (!tbody) return;
       tbody.innerHTML = '<tr><td colspan="10" style="text-align: center; color: #888;">Đang tải dữ liệu đánh giá từ SQL...</td></tr>';
-      
       try {
         const [resRev, resDoc, resServ, resNews] = await Promise.all([
           fetch(`${API_URL}?action=get_reviews`),
@@ -1706,19 +1681,9 @@ function renderDashChart(appointments) {
             let targetDisplay = r.target_id || '';
             const typeLower = (r.loai || '').toLowerCase();
             
-            if ((typeLower.includes('bác sĩ') || typeLower.includes('doctor')) && doctorsMap[r.target_id]) {
-              targetDisplay = `👨‍⚕️ ${doctorsMap[r.target_id]}`;
-            } else if ((typeLower.includes('dịch vụ') || typeLower.includes('service')) && servicesMap[r.target_id]) {
-              targetDisplay = `💉 ${servicesMap[r.target_id]}`;
-            } else if ((typeLower.includes('tin tức') || typeLower.includes('news')) && newsMap[r.target_id]) {
-              targetDisplay = `📰 ${newsMap[r.target_id]}`;
-            } else if (doctorsMap[r.target_id]) {
-              targetDisplay = `👨‍⚕️ ${doctorsMap[r.target_id]}`;
-            } else if (servicesMap[r.target_id]) {
-              targetDisplay = `💉 ${servicesMap[r.target_id]}`;
-            } else if (newsMap[r.target_id]) {
-              targetDisplay = `📰 ${newsMap[r.target_id]}`;
-            }
+            if (doctorsMap[r.target_id]) targetDisplay = `👨‍⚕️ ${doctorsMap[r.target_id]}`;
+            else if (servicesMap[r.target_id]) targetDisplay = `💉 ${servicesMap[r.target_id]}`;
+            else if (newsMap[r.target_id]) targetDisplay = `📰 ${newsMap[r.target_id]}`;
 
             return `
               <tr>
@@ -1767,23 +1732,16 @@ function renderDashChart(appointments) {
         try {
           const res = await fetch(`${API_URL}?action=delete_review&id=${id}`);
           const result = await res.json();
-          if (result.success) {
-            loadReviews();
-          } else {
-            alert("Lỗi: " + (result.message || "Không thể xóa đánh giá"));
-          }
-        } catch (e) {
-          alert("Lỗi kết nối máy chủ!");
-        }
+          if (result.success) loadReviews();
+          else alert("Lỗi: " + (result.message || "Không thể xóa"));
+        } catch (e) { alert("Lỗi kết nối máy chủ!"); }
       }
     }
 
-    
     async function loadSupportContacts() {
       const tbody = document.querySelector('#support-table tbody');
       if (!tbody) return;
       tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #888;">Đang tải dữ liệu...</td></tr>';
-
       try {
         const res = await fetch(`${API_URL}?action=get_contacts`);
         if (res.ok) {
@@ -1792,7 +1750,6 @@ function renderDashChart(appointments) {
             tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #888;">Chưa có yêu cầu hỗ trợ nào.</td></tr>';
             return;
           }
-
           tbody.innerHTML = list.map(item => {
             const statusClass = item.trang_thai === 'Đã trả lời' ? 'badge-arrived' : 'badge-pending';
             return `
@@ -1828,7 +1785,7 @@ function renderDashChart(appointments) {
         });
         const result = await res.json();
         if (result.success) loadSupportContacts();
-        else alert("Lỗi: " + (result.message || "Không thể cập nhật trạng thái"));
+        else alert("Lỗi: " + (result.message || "Không thể cập nhật"));
       } catch (e) { alert("Lỗi kết nối máy chủ!"); }
     }
 
@@ -1843,7 +1800,6 @@ function renderDashChart(appointments) {
       }
     }
 
-    
     let myAppChart = null;
     let myAppPieChart = null; 
     async function loadReportStats() {
@@ -1862,7 +1818,6 @@ function renderDashChart(appointments) {
         if (resServ.ok) services = await resServ.json();
         if (resInv.ok) inventory = await resInv.json();
 
-        
         let servicePriceMap = {};
         if (Array.isArray(services)) {
           services.forEach(s => {
@@ -1891,24 +1846,18 @@ function renderDashChart(appointments) {
           });
         }
 
-        
         let totalStock = 0;
         if (Array.isArray(inventory)) {
-          inventory.forEach(inv => {
-            totalStock += Number(inv.so_luong_ton || 0);
-          });
+          inventory.forEach(inv => { totalStock += Number(inv.so_luong_ton || 0); });
         }
 
-        
         let completionRate = appointments.length > 0 ? Math.round((totalCompleted / appointments.length) * 100) : 0;
 
-        
         document.getElementById('rep-total-revenue').innerText = totalRevenue.toLocaleString() + ' đ';
         document.getElementById('rep-total-completed-app').innerText = totalCompleted + ' lượt';
         document.getElementById('rep-total-inventory').innerText = totalStock.toLocaleString() + ' liều';
         document.getElementById('rep-completion-rate').innerText = completionRate + '%';
 
-        
         const ctxBar = document.getElementById('appointmentChart').getContext('2d');
         if (myAppChart) myAppChart.destroy();
 
@@ -1920,7 +1869,6 @@ function renderDashChart(appointments) {
               label: 'Số lượng',
               data: [totalCompleted, pendingCount, cancelledCount],
               backgroundColor: ['rgba(16, 185, 129, 0.7)', 'rgba(59, 130, 246, 0.7)', 'rgba(239, 68, 68, 0.7)'],
-              borderColor: ['rgb(16, 185, 129)', 'rgb(59, 130, 246)', 'rgb(239, 68, 68)'],
               borderWidth: 1,
               borderRadius: 4
             }]
@@ -1933,7 +1881,6 @@ function renderDashChart(appointments) {
           }
         });
 
-       
         const ctxPie = document.getElementById('appointmentPieChart').getContext('2d');
         if (myAppPieChart) myAppPieChart.destroy();
 
@@ -1950,18 +1897,10 @@ function renderDashChart(appointments) {
           options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: {
-              legend: {
-                position: 'bottom',
-                labels: { boxWidth: 12, font: { size: 12 } }
-              }
-            }
+            plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 12 } } } }
           }
         });
-
-      } catch (err) {
-        console.error("Lỗi tải báo cáo thống kê:", err);
-      }
+      } catch (err) { console.error("Lỗi tải báo cáo:", err); }
     }
     
     async function loadAccountsList() {
@@ -2056,7 +1995,7 @@ function renderDashChart(appointments) {
           alert("Lưu tài khoản thành công!");
           closeAccountModal();
           loadAccountsList();
-        } else { alert("Lỗi: " + (result.message || "Không thể lưu tài khoản")); }
+        } else { alert("Lỗi: " + (result.message || "Không thể lưu")); }
       } catch (err) { alert("Lỗi kết nối máy chủ!"); }
     }
 
@@ -2071,7 +2010,145 @@ function renderDashChart(appointments) {
       }
     }
 
-   
+    async function loadHRList() {
+      const tbody = document.querySelector('#hr-table tbody');
+      if (!tbody) return;
+      tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: #888;">Đang tải danh sách thành viên từ bảng users...</td></tr>';
+      try {
+        const res = await fetch(`${API_URL}?action=get_accounts`);
+        if (res.ok) {
+          const list = await res.json();
+          if (!Array.isArray(list) || list.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: #888;">Chưa có tài khoản nào trong cơ sở dữ liệu.</td></tr>';
+            return;
+          }
+
+          const staffAndManagers = list.filter(acc => {
+            const role = (acc.role || '').toLowerCase();
+            return role === 'staff' || role === 'manager';
+          });
+
+          if (staffAndManagers.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: #888;">Không tìm thấy tài khoản Staff hoặc Manager nào.</td></tr>';
+            return;
+          }
+
+          tbody.innerHTML = staffAndManagers.map(acc => {
+            let statusBadge = acc.status === 'locked' ? '<span class="badge badge-missing">Khóa</span>' : '<span class="badge badge-arrived">Hoạt động</span>';
+            let roleBadge = acc.role === 'manager' 
+              ? '<span class="badge badge-arrived" style="background: #0d9488; color: white;">manager</span>' 
+              : '<span class="badge badge-pending">staff</span>';
+
+            let avatarUrl = acc.avatar ? acc.avatar : 'https://cdn-icons-png.flaticon.com/512/149/149071.png';
+
+            return `
+              <tr>
+                <td>${acc.id}</td>
+                <td>
+                  <img src="${escapeHtml(avatarUrl)}" alt="Avatar" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 1px solid #ccc;">
+                </td>
+                <td><strong>${escapeHtml(acc.fullName || acc.ho_ten || '')}</strong></td>
+                <td>${escapeHtml(acc.email || '')}</td>
+                <td>${escapeHtml(acc.phone || acc.so_dien_thoai || 'N/A')}</td>
+                <td>${roleBadge}</td>
+                <td>${statusBadge}</td>
+                <td>
+                  <div class="actions">
+                    <button class="btn btn-warning" style="padding: 5px 10px; font-size: 12px;" onclick='editAccount(${JSON.stringify(acc)})'>Sửa</button>
+                    <button class="btn btn-danger" style="padding: 5px 10px; font-size: 12px;" onclick="deleteAccount(${acc.id})">Xóa</button>
+                  </div>
+                </td>
+              </tr>
+            `;
+          }).join('');
+        }
+      } catch (e) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: #ef4444;">Lỗi kết nối CSDL thành viên.</td></tr>';
+      }
+    }
+
+    function filterHRTable() {
+      let input = document.getElementById('hrSearchInput').value.toLowerCase();
+      let rows = document.querySelector('#hr-table tbody').getElementsByTagName('tr');
+      for (let i = 0; i < rows.length; i++) {
+        rows[i].style.display = rows[i].textContent.toLowerCase().includes(input) ? "" : "none";
+      }
+    }
+
+    function initHRForm() {
+      const form = document.getElementById('hr-form');
+      if (!form) return;
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const id = document.getElementById('hr-id').value;
+        const actionType = id ? 'update_hr' : 'add_hr';
+        const payload = {
+          id: id ? parseInt(id) : undefined,
+          ho_ten: document.getElementById('hr-name').value.trim(),
+          chuc_vu: document.getElementById('hr-position').value.trim(),
+          phong_ban: document.getElementById('hr-department').value.trim(),
+          so_dien_thoai: document.getElementById('hr-phone').value.trim(),
+          email: document.getElementById('hr-email').value.trim(),
+          luong_co_ban: document.getElementById('hr-salary').value.trim(),
+          trang_thai: document.getElementById('hr-status').value
+        };
+
+        try {
+          const res = await fetch(`${API_URL}?action=${actionType}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const result = await res.json();
+          if (result.success) {
+            alert(id ? "Cập nhật nhân sự thành công!" : "Thêm nhân sự thành công!");
+            resetHRForm();
+            loadHRList();
+          } else {
+            alert("Lỗi: " + (result.message || "Không thể lưu"));
+          }
+        } catch (err) {
+          alert("Lỗi kết nối máy chủ!");
+        }
+      });
+    }
+
+    function editHR(item) {
+      document.getElementById('hr-form-title').innerText = "✏️ Cập nhật Thông tin Nhân sự";
+      document.getElementById('hr-id').value = item.id;
+      document.getElementById('hr-name').value = item.ho_ten || '';
+      document.getElementById('hr-position').value = item.chuc_vu || '';
+      document.getElementById('hr-department').value = item.phong_ban || '';
+      document.getElementById('hr-phone').value = item.so_dien_thoai || '';
+      document.getElementById('hr-email').value = item.email || '';
+      document.getElementById('hr-salary').value = item.luong_co_ban || '';
+      document.getElementById('hr-status').value = item.trang_thai || 'Đang làm việc';
+
+      document.getElementById('btn-save-hr').innerText = "Cập nhật nhân sự";
+      document.getElementById('btn-cancel-edit-hr').style.display = "inline-block";
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function resetHRForm() {
+      document.getElementById('hr-form-title').innerText = "➕ Thêm Hồ sơ Nhân sự Mới";
+      document.getElementById('hr-form').reset();
+      document.getElementById('hr-id').value = '';
+      document.getElementById('btn-save-hr').innerText = "Lưu nhân sự";
+      document.getElementById('btn-cancel-edit-hr').style.display = "none";
+    }
+
+    async function deleteHR(id) {
+      if (confirm("Bạn có chắc chắn muốn xóa nhân sự này không?")) {
+        try {
+          const res = await fetch(`${API_URL}?action=delete_hr&id=${id}`);
+          const result = await res.json();
+          if (result.success) loadHRList();
+          else alert("Lỗi: " + (result.message || "Không thể xóa"));
+        } catch (e) { alert("Lỗi kết nối máy chủ!"); }
+      }
+    }
+
+    /* --- Attendance Management Functions --- */
     async function loadAttendanceList() {
       const tbody = document.querySelector('#attendance-table tbody');
       if (!tbody) return;
@@ -2127,14 +2204,15 @@ function renderDashChart(appointments) {
             });
           }
         }
-      } catch (e) { console.error(e); }
+      } catch (e) {
+        console.error("Lỗi tải danh sách nhân viên chấm công:", e);
+      }
     }
 
-    async function openAttendanceModal() {
+    function openAttendanceModal() {
       document.getElementById('attendance-form').reset();
       document.getElementById('att-id').value = '';
-      document.getElementById('att-date').value = new Date().toISOString().split('T')[0];
-      await populateAttendanceStaffDropdown();
+      populateAttendanceStaffDropdown();
       document.getElementById('attendanceModal').style.display = 'flex';
     }
 
@@ -2142,23 +2220,23 @@ function renderDashChart(appointments) {
       document.getElementById('attendanceModal').style.display = 'none';
     }
 
-    async function editAttendance(at) {
+    function editAttendance(at) {
       document.getElementById('att-id').value = at.id;
-      document.getElementById('att-date').value = at.ngay_cham_cong || new Date().toISOString().split('T')[0];
+      populateAttendanceStaffDropdown(at.nhan_vien_id || at.staff_id);
+      document.getElementById('att-date').value = at.ngay_cham_cong || '';
       document.getElementById('att-time-in').value = at.gio_vao || '08:00';
       document.getElementById('att-time-out').value = at.gio_ra || '17:00';
-      document.getElementById('att-status').value = at.trang_thai || 'Đúng giờ';
-      await populateAttendanceStaffDropdown(at.nhan_vien_id);
+      document.getElementById('att-status').value = at.status || at.trang_thai || 'Đúng giờ';
       document.getElementById('attendanceModal').style.display = 'flex';
     }
 
     async function saveAttendance(e) {
       e.preventDefault();
-      const attId = document.getElementById('att-id').value;
-      const actionType = attId ? 'update_attendance' : 'add_attendance';
+      const id = document.getElementById('att-id').value;
+      const actionType = id ? 'update_attendance' : 'add_attendance';
       const payload = {
-        id: attId ? parseInt(attId) : undefined,
-        nhan_vien_id: document.getElementById('att-staff-id').value,
+        id: id ? parseInt(id) : undefined,
+        staff_id: document.getElementById('att-staff-id').value,
         ngay_cham_cong: document.getElementById('att-date').value,
         gio_vao: document.getElementById('att-time-in').value,
         gio_ra: document.getElementById('att-time-out').value,
@@ -2173,37 +2251,35 @@ function renderDashChart(appointments) {
         });
         const result = await res.json();
         if (result.success) {
-          alert("Lưu thông tin chấm công thành công!");
+          alert("Lưu chấm công thành công!");
           closeAttendanceModal();
           loadAttendanceList();
-        } else { alert("Lỗi: " + (result.message || "Không thể lưu chấm công")); }
-      } catch (err) { alert("Lỗi kết nối máy chủ!"); }
+        } else {
+          alert("Lỗi: " + (result.message || "Không thể lưu"));
+        }
+      } catch (err) {
+        alert("Lỗi kết nối máy chủ!");
+      }
     }
 
     async function deleteAttendance(id) {
-      if (confirm("Bạn có chắc chắn muốn xóa bản ghi chấm công này không?")) {
+      if (confirm("Xóa bản ghi chấm công này?")) {
         try {
           const res = await fetch(`${API_URL}?action=delete_attendance&id=${id}`);
           const result = await res.json();
           if (result.success) loadAttendanceList();
-          else alert("Lỗi: " + (result.message || "Không thể xóa"));
-        } catch (e) { alert("Lỗi kết nối máy chủ!"); }
+        } catch (err) { alert("Lỗi kết nối máy chủ!"); }
       }
     }
 
-    function logout() {
-      localStorage.removeItem('user');
-      window.location.href = 'index.html';
-    }
-
-    function escapeHtml(text) {
-      if (!text) return '';
-      return String(text)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
     }
   </script>
 </body>
