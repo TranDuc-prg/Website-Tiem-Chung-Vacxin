@@ -1,0 +1,101 @@
+    .page-content-wrapper {
+      padding: 40px 0;
+      background-color: #f8fafc;
+    }
+    .layout-grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 30px;
+    }
+    @media (max-width: 900px) {
+      .layout-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .main-article {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+      border: 1px solid #f1f5f9;
+    }
+    .main-article h2 {
+      font-size: 24px;
+      color: #1e293b;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+    .main-article h3 {
+      font-size: 18px;
+      color: #0284c7;
+      margin-top: 25px;
+      margin-bottom: 12px;
+    }
+    .main-article p {
+      color: #334155;
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 15px;
+    }
+    .main-article ul {
+      margin-bottom: 15px;
+      padding-left: 20px;
+      color: #334155;
+    }
+    .main-article li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+
+    .sidebar-widget {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+      border: 1px solid #f1f5f9;
+    }
+    .sidebar-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #dc2626;
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f1f5f9;
+    }
+    .side-news-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px dashed #e2e8f0;
+      align-items: center;
+      text-decoration: none;
+    }
+    .side-news-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .side-news-item img {
+      width: 70px;
+      height: 55px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+    .side-news-item h4 {
+      font-size: 13px;
+      color: #1e293b;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .side-news-item h4:hover {
+      color: #0284c7;
+    }
+ 

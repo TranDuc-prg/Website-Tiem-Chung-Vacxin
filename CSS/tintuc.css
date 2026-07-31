@@ -1,0 +1,134 @@
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: #f4f6f8; color: #333; line-height: 1.6; }
+
+
+    header { background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 1000; }
+    .nav-container { max-width: VACXIN1200px; margin: 0 auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 22px; font-weight: bold; color: #0d9488; text-decoration: none; }
+    .nav-links { display: flex; gap: 25px; list-style: none; align-items: center; }
+    .nav-links a { text-decoration: none; color: #475569; font-weight: 600; font-size: 15px; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: #0d9488; }
+    .btn-appointment-nav { background: #f59e0b; color: white !important; padding: 10px 18px; border-radius: 4px; font-weight: bold; }
+
+
+    .page-banner {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('IMAGE/anh1.jpg') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 70px 20px;
+      margin-bottom: 40px;
+    }
+    .page-banner h1 { font-size: 38px; font-weight: 800; letter-spacing: 1px; margin-bottom: 10px; text-transform: uppercase; }
+    .breadcrumb { font-size: 14px; color: #cbd5e1; }
+    .breadcrumb a { color: #f59e0b; text-decoration: none; }
+
+
+    .main-layout {
+      max-width: 1200px;
+      margin: 0 auto 50px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 30px;
+    }
+
+
+    .sidebar-left { display: flex; flex-direction: column; gap: 30px; }
+    
+
+    .booking-box {
+      background: #ffffff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      border-top: 4px solid #f59e0b;
+    }
+    .booking-header {
+      background: #f59e0b;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-weight: bold;
+      font-size: 16px;
+      text-transform: uppercase;
+    }
+    .booking-form { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .booking-form input, .booking-form select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      font-size: 14px;
+      background: #fff;
+    }
+    .btn-booking-submit {
+      background: #f59e0b;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .btn-booking-submit:hover { background: #d97706; }
+
+    .recent-posts-box {
+      background: #ffffff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      border-top: 4px solid #dc2626;
+    }
+    .recent-posts-header {
+      background: #ffffff;
+      color: #dc2626;
+      text-align: center;
+      padding: 15px;
+      font-weight: bold;
+      font-size: 16px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .recent-list { padding: 15px; display: flex; flex-direction: column; gap: 15px; }
+    .recent-item { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; color: inherit; padding-bottom: 12px; border-bottom: 1px solid #f1f5f9; }
+    .recent-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .recent-item img { width: 70px; height: 55px; object-fit: cover; border-radius: 4px; flex-shrink: 0; }
+    .recent-item-title { font-size: 13px; font-weight: 600; color: #1e293b; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .recent-item:hover .recent-item-title { color: #0d9488; }
+
+
+
+    .news-list-container { display: flex; flex-direction: column; gap: 20px; }
+    
+    .news-card-horizontal {
+      background: #ffffff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      display: flex;
+      border: 1px solid #e2e8f0;
+      transition: transform 0.2s;
+    }
+    .news-card-horizontal:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.08); }
+    
+    .news-card-img { width: 280px; height: 180px; flex-shrink: 0; background: #e2e8f0; overflow: hidden; }
+    .news-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .news-card-horizontal:hover .news-card-img img { transform: scale(1.05); }
+
+    .news-card-body { padding: 20px; display: flex; flex-direction: column; justify-content: center; flex: 1; }
+    .news-card-date { font-size: 12px; color: #94a3b8; margin-bottom: 6px; }
+    .news-card-title { font-size: 18px; font-weight: bold; color: #1e293b; margin-bottom: 10px; text-decoration: none; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .news-card-title:hover { color: #0d9488; }
+    .news-card-summary { font-size: 14px; color: #64748b; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+    .no-data { text-align: center; padding: 40px; background: white; border-radius: 6px; color: #64748b; }
+
+
+
+    @media(max-width: 900px) {
+      .main-layout { grid-template-columns: 1fr; }
+      .news-card-horizontal { flex-direction: column; }
+      .news-card-img { width: 100%; height: 200px; }
+    }
